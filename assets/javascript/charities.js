@@ -38,7 +38,7 @@ $(document).ready(function () {
         },
 
         tableGenerator: function (response) {
-            $("#charities-table").empty();
+            $("#charities-table-body").empty();
             for (i=0; i<response.length; i++) {
                 var $name = $("<td>").text(response[i].charityName);
                 var $Location = $("<td>").text(response[i].mailingAddress.city + ", " + response[i].mailingAddress.stateOrProvince);
@@ -50,7 +50,7 @@ $(document).ready(function () {
                     var $URL = $("<td>").text("Not Available");
                 }
                 
-                $("#charities-table").append($("<tr>").append($name, $Location, $Mission,$EvaluateURL, $URL))
+                $("#charities-table-body").append($("<tr>").append($name, $Location, $Mission,$EvaluateURL, $URL))
             }
         }
     }
