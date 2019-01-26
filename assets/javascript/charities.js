@@ -25,6 +25,19 @@ $(document).ready(function () {
             // requestURL += "&donorPrivacy=true";
             // requestURL += "&scopeOfWork=REGIONAL"; // very limited
             // requestURL += "&sort=RATING";
+
+            var url = 'https://newsapi.org/v2/everything?' +
+                //'country=us&' +
+                'q=' +
+                query +
+                '&apiKey=e624c791383a46cabe1b19e39ba150f4';
+            var req = new Request(url);
+            fetch(req)
+                .then(function (response) {
+                    console.log(response.json());
+                })
+
+
             if (id !== "") {
                 requestURL += "&categoryID=" + id;
             }
