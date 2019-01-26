@@ -27,7 +27,6 @@ $(document).ready(function () {
             var isAnonymous = user.isAnonymous;
             console.log("user signed in?: ", isAnonymous);
             user_UID = user.uid;
-
             console.log("user.uid: ", user.uid);
         } else {
             // FirebaseAuth.getInstance().signOut();
@@ -36,19 +35,11 @@ $(document).ready(function () {
 
     // User listener - retreives user's saved preferences
     database.ref("/users").on("value", function (userSnapshot) {
+        query = userSnapshot.child(user_UID).val().query;
+        categoryID = userSnapshot.child(user_UID).val().query
         console.log("user ID: ", userSnapshot.child(user_UID).val());
-        userScore = userSnapshot.child(user_UID).val().lastQuery;
         console.log("Last query: ", lastQuery);
-        /*
-        console.log("name exists: ", userSnapshot.child(user_UID).child("name").exists());
-        if (userSnapshot.child(user_UID).child("name").exists() === false) {
-
-            name = "guest"; // assigns name of guest if there is none
-        } else {
-            name = userSnapshot.child(user_UID).val().name;
-            console.log("Get user name: ", name);
-        }
-        */
+        console.log("Last Category ID: ", categoryID)
     });
 
     // Firebase connection status
@@ -59,10 +50,20 @@ $(document).ready(function () {
         }
     });
 
-    // Number of connections
-    connections.on("value", function (connectionSnapshot) {
-        // $("#online-viewers").text(connectionSnapshot.numChildren()); // gets number of connections and outputs to DOM
-        console.log(connectionSnapshot.numChildren());
+    // ------------ TODO ------------
+    // save user's preference
+    // set the user pref to Firebase
+
+
+    // Event Listeners
+    $(".dropdown-item").on("click", function () {
+        category = $(this).attr("value");
+        searchItem = $("#searchItem").val();
     });
+
+    $("#searchItem").on("click", function (event) {
+        event.preventDefault();
+        searchItem = $("#searchItem").val();
+    })
 
 });
