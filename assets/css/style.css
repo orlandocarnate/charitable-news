@@ -1,0 +1,9 @@
+body {
+    background: url('../images/coffee-cup-information-97050.jpg') no-repeat;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+} 
+
+#navbar{
+    opacity: 1.1;
+}
