@@ -39,7 +39,6 @@ $(document).ready(function () {
             });
 
 
-            /*
             // ------- NEWS API ---------
             var url = 'https://newsapi.org/v2/everything?' +
                 //'country=us&' +
@@ -65,12 +64,10 @@ $(document).ready(function () {
             });
 
             // --------- /NEWS -----------
-
-            */
         },
 
         charitiesTableGenerator: function (response) {
-            var $table = $("<table>");
+            var $table = $("<table class='charities'>");
             for (i = 0; i < response.length; i++) {
                 var $name = $("<td>").text(response[i].charityName);
                 var $Location = $("<td>").text(response[i].mailingAddress.city + ", " + response[i].mailingAddress.stateOrProvince);
@@ -86,19 +83,21 @@ $(document).ready(function () {
             }
         },
 
-        // newsTableGenerator: function (response) {
-        //     var $table = $("<table>");
-        //     console.log("news articles 1: ", response.articles[0].title);
-        //     console.log("news object: ", response);
-        //     for (i = 0; i < response.articles.length; i++) {
-        //         var $title = $("<td>").text(response.articles[i].title);
-        //         var $source = $("<td>").text(response.articles[i].source.name + ", " + response[i].mailingAddress.stateOrProvince);
-        //         var $img = $("<td>").html("<img class='article-img' src='" + response.articles[i].urlToImage + "'>");
-        //         var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
-        //         $table.append($("<tr>").append($title, $source, $img, $url));
-        //         $("#results").append($table);
-        //     }
-        // }
+        newsTableGenerator: function (response) {
+            var $table = $("<table class='news'>");
+            console.log("news table gen");
+            console.log("news articles 1: ", response.articles[0].title);
+            console.log("news object: ", response);
+            for (i = 0; i < response.articles.length; i++) {
+                var $title = $("<td>").text(response.articles[i].title);
+                var $descrip = $("<td>").text(response.articles[i].description);
+                var $source = $("<td>").text(response.articles[i].source.name);
+                var $img = $("<td>").html("<img class='article-img' width='64px' height='64px' src='" + response.articles[i].urlToImage + "'>");
+                var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
+                $table.append($("<tr>").append($title, $descrip, $source, $img, $url));
+                $("#results").append($table);
+            }
+        }
     }
 
     $("#searchBtn").on("click", function (event) {
