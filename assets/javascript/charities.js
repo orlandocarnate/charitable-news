@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
-        var query = $("#searthItem").val();
+        var query = $("#searchItem").val();
         charityNavigator.search(query);
         // var catID = $("#category-id option:selected").val();
         // console.log("catID: ", catID);
