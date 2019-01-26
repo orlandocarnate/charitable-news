@@ -8,7 +8,7 @@ $(document).ready(function () {
             var requestURL = "https://api.data.charitynavigator.org/v2/Organizations";
             requestURL += "?app_id=" + appID;
             requestURL += "&app_key=" + key;
-            requestURL += "&pageSize=5";
+            requestURL += "&pageSize=6";
             // if (query.trim() !== '') {
             //     requestURL += "&search=" + query;
             // }
@@ -55,7 +55,7 @@ $(document).ready(function () {
             var newsURL = 'https://newsapi.org/v2/everything?';
             newsURL += 'q=' + query;
             newsURL += '&apiKey=e624c791383a46cabe1b19e39ba150f4';
-            newsURL += '&pageSize=5';
+            newsURL += '&pageSize=6';
             $.ajax({
                 url: newsURL,
                 method: "GET"
