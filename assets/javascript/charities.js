@@ -67,7 +67,7 @@ $(document).ready(function () {
         },
 
         charitiesTableGenerator: function (response) {
-            var $table = $("<table>");
+            var $table = $("<table class='charities'>");
             for (i = 0; i < response.length; i++) {
                 var $name = $("<td>").text(response[i].charityName);
                 var $Location = $("<td>").text(response[i].mailingAddress.city + ", " + response[i].mailingAddress.stateOrProvince);
@@ -84,7 +84,7 @@ $(document).ready(function () {
         },
 
         newsTableGenerator: function (response) {
-            var $table = $("<table>");
+            var $table = $("<table class='news'>");
             console.log("news table gen");
             console.log("news articles 1: ", response.articles[0].title);
             console.log("news object: ", response);
