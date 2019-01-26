@@ -26,6 +26,8 @@ $(document).ready(function () {
             // requestURL += "&scopeOfWork=REGIONAL"; // very limited
             // requestURL += "&sort=RATING";
 
+
+            // ------- NEWS API ---------
             var url = 'https://newsapi.org/v2/everything?' +
                 //'country=us&' +
                 'q=' +
@@ -36,7 +38,7 @@ $(document).ready(function () {
                 .then(function (response) {
                     console.log(response.json());
                 })
-
+            // --------- /NEWS -----------
 
             if (id !== "") {
                 requestURL += "&categoryID=" + id;
@@ -51,7 +53,8 @@ $(document).ready(function () {
         },
 
         tableGenerator: function (response) {
-            $("#charities-table-body").empty();
+            $("#results").empty();
+            var $table = $("<table>");
             for (i=0; i<response.length; i++) {
                 var $name = $("<td>").text(response[i].charityName);
                 var $Location = $("<td>").text(response[i].mailingAddress.city + ", " + response[i].mailingAddress.stateOrProvince);
@@ -63,7 +66,7 @@ $(document).ready(function () {
                     var $URL = $("<td>").text("Not Available");
                 }
                 
-                $("#charities-table-body").append($("<tr>").append($name, $Location, $Mission,$EvaluateURL, $URL))
+                $table.append($("#charities-table-body").append($("<tr>").append($name, $Location, $Mission,$EvaluateURL, $URL)));
             }
         }
     }
