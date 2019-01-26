@@ -29,16 +29,17 @@ $(document).ready(function () {
             //     requestURL += "&categoryID=" + id;
             // }
 
-            charity AJAX call
+            // charity AJAX call
             $.ajax({
                 url: requestURL,
                 method: "GET"
             }).then(function (response) {
                 console.log(response);
-                charityNavigator.tableGenerator(response);
+                charityNavigator.charitiesTableGenerator(response);
             });
 
 
+            /*
             // ------- NEWS API ---------
             var url = 'https://newsapi.org/v2/everything?' +
                 //'country=us&' +
@@ -65,7 +66,7 @@ $(document).ready(function () {
 
             // --------- /NEWS -----------
 
-
+            */
         },
 
         charitiesTableGenerator: function (response) {
@@ -85,19 +86,19 @@ $(document).ready(function () {
             }
         },
 
-        newsTableGenerator: function (response) {
-            var $table = $("<table>");
-            console.log("news articles 1: ", response.articles[0].title);
-            console.log("news object: ", response);
-            for (i = 0; i < response.articles.length; i++) {
-                var $title = $("<td>").text(response.articles[i].title);
-                var $source = $("<td>").text(response.articles[i].source.name + ", " + response[i].mailingAddress.stateOrProvince);
-                var $img = $("<td>").html("<img class='article-img' src='" + response.articles[i].urlToImage + "'>");
-                var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
-                $table.append($("<tr>").append($title, $source, $img, $url));
-                $("#results").append($table);
-            }
-        }
+        // newsTableGenerator: function (response) {
+        //     var $table = $("<table>");
+        //     console.log("news articles 1: ", response.articles[0].title);
+        //     console.log("news object: ", response);
+        //     for (i = 0; i < response.articles.length; i++) {
+        //         var $title = $("<td>").text(response.articles[i].title);
+        //         var $source = $("<td>").text(response.articles[i].source.name + ", " + response[i].mailingAddress.stateOrProvince);
+        //         var $img = $("<td>").html("<img class='article-img' src='" + response.articles[i].urlToImage + "'>");
+        //         var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
+        //         $table.append($("<tr>").append($title, $source, $img, $url));
+        //         $("#results").append($table);
+        //     }
+        // }
     }
 
     $("#searchBtn").on("click", function (event) {
