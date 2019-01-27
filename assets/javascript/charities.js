@@ -1,4 +1,4 @@
-$(document).ready(function () {
+// $(document).ready(function () {
 
     // charity navigator API https://charity.3scale.net/
     var charityNavigator = {
@@ -92,10 +92,11 @@ $(document).ready(function () {
             for (i = 0; i < response.articles.length; i++) {
                 var $title = $("<td>").text(response.articles[i].title);
                 var $descrip = $("<td>").text(response.articles[i].description);
+                var $content = $("<td>").text(response.articles[i].content);
                 var $source = $("<td>").text(response.articles[i].source.name);
                 var $img = $("<td>").html("<img class='article-img' width='64px' height='64px' src='" + response.articles[i].urlToImage + "'>");
                 var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
-                $table.append($("<tr>").append($title, $descrip, $source, $img, $url));
+                $table.append($("<tr>").append($title, $descrip, $content, $source, $img, $url));
                 $("#results").append($table);
             }
         }
@@ -114,4 +115,4 @@ $(document).ready(function () {
 
     });
 
-});
+// });
