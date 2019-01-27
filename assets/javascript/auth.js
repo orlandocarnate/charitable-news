@@ -2,12 +2,12 @@ $(document).ready(function () {
     // ---------- FIREBASE ----------------
     // FIREBASE API
     var config = {
-        apiKey: "AIza" + "SyA6MnePmIsN9caVZaX1GQGt1dRkh" + "-8MBTc",
-        authDomain: "rps-game-148d6.firebaseapp.com",
-        databaseURL: "https://rps-game-148d6.firebaseio.com",
-        projectId: "rps-game-148d6",
+        apiKey: "AIzaSy" + "AASk8ZLQcP1A5" + "idZbp5DEbKqjr7oWDndY",
+        authDomain: "project1-4750c.firebaseapp.com",
+        databaseURL: "https://project1-4750c.firebaseio.com",
+        projectId: "project1-4750c",
         storageBucket: "",
-        messagingSenderId: "472953467227"
+        messagingSenderId: "87599609437"
     };
     firebase.initializeApp(config); // Initialize Firebase
 
@@ -17,8 +17,14 @@ $(document).ready(function () {
     var isConnected = database.ref(".info/connected"); // boolean value - true if client is connected, false if not.
     var user_UID; // Global USER object for firebase.auth().onAuthStateChanged(function (user) {...}
 
-    var userObject = firebase.auth().signInAnonymously(); // OBJECT for Anon Auth ands SIGNS IN
-    console.log("Logged In as Anon. User Object: ", userObject);
+    // OBJECT for Anon Auth ands SIGNS IN
+    firebase.auth().signInAnonymously().catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error code & Message if any: ", errorCode, errorMessage);
+        // ...
+    });
 
     // ---------- ANONYMOUS AUTHENTICATION to get a userID -------------------
     firebase.auth().onAuthStateChanged(function (user) {
@@ -35,11 +41,18 @@ $(document).ready(function () {
 
     // User listener - retreives user's saved preferences
     database.ref("/users").on("value", function (userSnapshot) {
-        query = userSnapshot.child(user_UID).val().query;
-        categoryID = userSnapshot.child(user_UID).val().query
-        console.log("user ID: ", userSnapshot.child(user_UID).val());
-        console.log("Last query: ", lastQuery);
-        console.log("Last Category ID: ", categoryID)
+        console.log("Query exists? ", userSnapshot.child(user_UID).child("query").exists());
+        console.log("CatID exists? ", userSnapshot.child(user_UID).child("query").exists());
+        console.log("userID saved? ", userSnapshot.child(user_UID).exists());
+        // if (userSnapshot.child(user_UID).exists()) {
+            // console.log("user ID: ", userSnapshot.child(user_UID));
+        // };
+        if (userSnapshot.child(user_UID).child("lastsearch").exists()) {
+            console.log("lastsearch: ", userSnapshot.child(user_UID).val().lastsearch);
+            query = userSnapshot.child(user_UID).val().lastsearch;
+            charityNavigator.search(query);
+        };
+        
     });
 
     // Firebase connection status
@@ -61,9 +74,14 @@ $(document).ready(function () {
         searchItem = $("#searchItem").val();
     });
 
-    $("#searchItem").on("click", function (event) {
+    $("#searchBtn").on("click", function (event) {
         event.preventDefault();
-        searchItem = $("#searchItem").val();
+        searchItem = $("#searchItem").val().trim();
+        if (searchItem !== '') {
+            database.ref("/users").child(user_UID).update({ lastsearch: searchItem });
+        }
+        
+
     })
 
 });
