@@ -42,13 +42,13 @@ var newsFinder = {
     newsGenerator: function (response) {
 
         // clear results section
-        $("main").empty();
+        $(".grid-container").empty();
         // var $table = $("<table class='news'>");
         console.log("news table gen");
         console.log("news articles 1: ", response.articles[0].title);
         console.log("news object: ", response);
         for (i = 0; i < response.articles.length; i++) {
-            $card = $("<div class='card newscard' data-article='" + i + "'>");
+            $card = $("<div class='grid-item card newscard' data-article='" + i + "'>");
             var $img = $("<img class='card-img-top'>").attr({ "src": response.articles[i].urlToImage });
             var $body = $("<div class='card-body'>");
             var $title = $("<div class='card-title'>").html(response.articles[i].title);
@@ -58,7 +58,7 @@ var newsFinder = {
 
             // var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
             $card.append($img, $body.append($title, $descrip, $source));
-            $("main").append($card);
+            $(".grid-container").append($card);
         }
     },
 
