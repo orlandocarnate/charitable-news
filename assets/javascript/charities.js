@@ -42,7 +42,7 @@ var newsFinder = {
     newsGenerator: function (response) {
 
         // clear results section
-        $(".grid-container").empty();
+        $("#gridContainer").empty();
         // var $table = $("<table class='news'>");
         console.log("news table gen");
         console.log("news articles 1: ", response.articles[0].title);
@@ -58,7 +58,7 @@ var newsFinder = {
 
             // var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
             $card.append($img, $body.append($title, $descrip, $source));
-            $(".grid-container").append($card);
+            $("#gridContainer").append($card);
         }
     },
 
