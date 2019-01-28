@@ -50,7 +50,7 @@ $(document).ready(function () {
         if (userSnapshot.child(user_UID).child("lastsearch").exists()) {
             console.log("lastsearch: ", userSnapshot.child(user_UID).val().lastsearch);
             query = userSnapshot.child(user_UID).val().lastsearch;
-            charityNavigator.search(query);
+            newsFinder.search(query);
         };
         
     });
