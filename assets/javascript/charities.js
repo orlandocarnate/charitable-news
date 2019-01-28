@@ -1,9 +1,12 @@
 // $(document).ready(function () {
 // Global Variables
 var catID;
+var newsData;
+var charityData;
 
 // news object & API
 var newsFinder = {
+
     search: function (query) {
         // ------- NEWS API ---------
         /* 
@@ -29,6 +32,7 @@ var newsFinder = {
             method: "GET"
         }).then(function (newsresponse) {
             console.log("news AJAX: ", newsresponse);
+            newsData = newsresponse; // save newsresponse to global varial newsData to be used later
             newsFinder.newsGenerator(newsresponse);
         });
 
@@ -36,24 +40,31 @@ var newsFinder = {
     },
 
     newsGenerator: function (response) {
-        var $table = $("<table class='news'>");
+
+        // clear results section
+        $("main").empty();
+        // var $table = $("<table class='news'>");
         console.log("news table gen");
         console.log("news articles 1: ", response.articles[0].title);
         console.log("news object: ", response);
         for (i = 0; i < response.articles.length; i++) {
-            var $title = $("<td>").text(response.articles[i].title);
-            var $descrip = $("<td>").text(response.articles[i].description);
-            var $content = $("<td>").text(response.articles[i].content);
-            var $source = $("<td>").text(response.articles[i].source.name);
-            var $img = $("<td>").html("<img class='article-img' width='64px' height='64px' src='" + response.articles[i].urlToImage + "'>");
-            var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
-            $table.append($("<tr>").append($title, $descrip, $content, $source, $img, $url));
-            $("main").append($table);
+            $card = $("<div class='card newscard' data-article='" + i + "'>");
+            var $img = $("<img class='card-img-top'>").attr({ "src": response.articles[i].urlToImage });
+            var $body = $("<div class='card-body'>");
+            var $title = $("<div class='card-title'>").html(response.articles[i].title);
+            var $descrip = $("<div class='card-text'>").html(response.articles[i].description);
+            // var $content = $("<td>").text(response.articles[i].content);
+            var $source = $("<div class='source'>").text(response.articles[i].source.name);
+
+            // var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
+            $card.append($img, $body.append($title, $descrip, $source));
+            $("main").append($card);
         }
     },
 
     articleGenerator: function (item) {
-        // display single item data
+        // 
+        // display single artile using item as an index to get info from newsData
 
     },
 
@@ -131,12 +142,12 @@ $(".dropdown-item").on("click", function (event) {
     var selectedID = $(this).attr("id");
     catID = $(this).attr("value");
     console.log("ID, CatID: ", selectedID, catID);
-    newsFinder.search(query);
+    newsFinder.search(selectedID);
 });
 
 $("#searchBtn").on("click", function (event) {
     event.preventDefault();
-    $("#results").empty();
+
     var query = $("#searchItem").val();
     newsFinder.search(query);
     // var catID = $("#category-id option:selected").val();
@@ -148,8 +159,10 @@ $("#searchBtn").on("click", function (event) {
 });
 
 // TODO: Listener for Single Article
-$(".article").on("click", function () {
-    var article = $(this).val("data-article");
+$(document).on("click", ".newscard", function (event) {
+    event.preventDefault();
+    var article = $(this).attr("data-article");
+    alert(article);
 
 });
 

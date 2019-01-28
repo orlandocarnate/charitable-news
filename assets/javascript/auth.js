@@ -45,14 +45,14 @@ $(document).ready(function () {
         console.log("CatID exists? ", userSnapshot.child(user_UID).child("query").exists());
         console.log("userID saved? ", userSnapshot.child(user_UID).exists());
         // if (userSnapshot.child(user_UID).exists()) {
-            // console.log("user ID: ", userSnapshot.child(user_UID));
+        // console.log("user ID: ", userSnapshot.child(user_UID));
         // };
         if (userSnapshot.child(user_UID).child("lastsearch").exists()) {
             console.log("lastsearch: ", userSnapshot.child(user_UID).val().lastsearch);
             query = userSnapshot.child(user_UID).val().lastsearch;
             newsFinder.search(query);
         };
-        
+
     });
 
     // Firebase connection status
@@ -67,21 +67,34 @@ $(document).ready(function () {
     // save user's preference
     // set the user pref to Firebase
 
+    // --- EVENT LISTENERS ----
 
-    // Event Listeners
-    $(".dropdown-item").on("click", function () {
-        category = $(this).attr("value");
-        searchItem = $("#searchItem").val();
+    // Dropdown listener
+    $(".dropdown-item").on("click", function (event) {
+        event.preventDefault();
+        // get value of 'this' selected dropdown
+        var selectedID = $(this).attr("id");
+        catID = $(this).attr("value");
+        console.log("ID, CatID: ", selectedID, catID);
+        newsFinder.search(selectedID);
+        if (selectedID !== '') {
+            database.ref("/users").child(user_UID).update({ lastsearch: selectedID });
+        }
+
     });
 
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
-        searchItem = $("#searchItem").val().trim();
         if (searchItem !== '') {
             database.ref("/users").child(user_UID).update({ lastsearch: searchItem });
         }
-        
 
-    })
+        // var catID = $("#category-id option:selected").val();
+        // console.log("catID: ", catID);
+        // if (query !== "") {
+        // charityNavigator.search(query, catID);
+        // }
+
+    });
 
 });
