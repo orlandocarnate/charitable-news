@@ -150,11 +150,7 @@ $("#searchBtn").on("click", function (event) {
 
     var query = $("#searchItem").val();
     newsFinder.search(query);
-    // var catID = $("#category-id option:selected").val();
-    // console.log("catID: ", catID);
-    // if (query !== "") {
-    // charityNavigator.search(query, catID);
-    // }
+
 
 });
 
