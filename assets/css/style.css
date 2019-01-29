@@ -1,28 +1,90 @@
-body {
-    background: url('../images/coffee-cup-information-97050.jpg') no-repeat;
+
+
+/* body {
+    background: url('../images/man-hands-reading-boy.jpg') no-repeat;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
-} 
+    height:100vh;
+        box-sizing:border-box; 
+     overflow-y:hidden; }
+
+     @media (min-width: 992px) { */
+        body {
+            background: url('../images/img3.jpg') no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+            
+            
+        } 
+    /* } */
+    
+
+
+
+.dropdown-menu {
+    background-color: rgba(12, 11, 11, 0.548);
+    color: white;
+    
+}
+
+.dropdown-menu > li > a:hover{
+    background-color: rgba(143, 137, 137, 0.795); 
+
+}
+
+#navDrop > a:hover{
+color: rgba(143, 137, 137, 0.795); 
+}
+
+.navbar-brand:hover{
+    color: rgba(143, 137, 137, 0.795);  
+}
+
+a{
+    color: white;
+}
+
+.btn{
+    color: white;
+    border: none;
+}
+
+.transition-property{
+    border-color: none;
+}
 
 #navbar{
     opacity: 1.1;
     width: 100%;
+   margin-right: 0;
+   margin-left: 0;
+   background-color: rgba(12, 11, 11, 0.548);
+   color: white;
+
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 10px;
+    
  
 }
 
 .grid-item {
-background-color: bisque;
+background-color: hsla(0,0%,100%,.3);
 opacity: 0.8;
 padding: 20px;
 font-size: 30px;
 text-align: center;
 margin: 10px;
+font-size: 15px;
 
 }
+
+.searchItem{
+    transition-property: none;
+}
+
+
 
