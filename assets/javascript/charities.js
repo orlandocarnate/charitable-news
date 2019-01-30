@@ -48,7 +48,7 @@ var newsFinder = {
         console.log("news articles 1: ", response.articles[0].title);
         console.log("news object: ", response);
         for (i = 0; i < response.articles.length; i++) {
-            $card = $("<div class='grid-item col-sm-4 col-lg-4 card' data-article='" + i + "'>");
+            $card = $("<div class='grid-item col-sm-4' data-article='" + i + "'>");
             var $img = $("<img class='card-img-top'>").attr({ "src": response.articles[i].urlToImage });
             var $body = $("<div class='card-body'>");
             var $title = $("<div class='card-title'>").html(response.articles[i].title);
