@@ -79,7 +79,7 @@ var newsFinder = {
         console.log("source: ", article.source.name);
 
         var $article = $("<div class='grid-item card newscard' data-article='" + i + "'>");
-        var $articleIMG = $("<img class='card-img-top'>").attr({ "src": article.urlToImage });
+        var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage, "style": "text-align: center" });
         var $articleBody = $("<div class='card-body'>");
         var $articleTitle = $("<div class='card-title'>").html(article.title);
         var $articleContent = $("<div class='card-content'>").html(article.content);
