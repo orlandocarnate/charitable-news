@@ -66,8 +66,10 @@ var newsFinder = {
     },
 
     articleGenerator: function (item) {
+        $("#articleDisplay").show();
         // display single artile using item as an index to get info from newsData
         // console.log("item: ", item, "newsData: ", newsData, "newsData.articles[item]: ", newsData.articles[item]);
+        $articleDisplay = $("#articleDisplay");
         var article = newsData.articles[item];
         // console.log("article object: ",article);
         console.log("item: ", item);
@@ -83,6 +85,7 @@ var newsFinder = {
         var $articleSource = $("<div class='source'>").text(article.source.name);
 
         $article.append($articleIMG, $articleBody.append($articleTitle, $articleContent, $articleSource));
+        $articleDisplay.append($article);
 
     },
 
@@ -172,9 +175,17 @@ $(document).on("click", ".grid-item", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
     console.log(articleNum);
+    $("#gridContainer").hide();
     newsFinder.articleGenerator(articleNum);
 
 });
+
+// RETURN BUTTON listener
+$(document).on("click", "#returnBtn", function (event){
+    event.preventDefault();
+    $("#articleDisplay").hide();
+    $("#gridContainer").show();
+})
 
 
     // TODO: Listener for Single Charity
