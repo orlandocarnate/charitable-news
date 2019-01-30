@@ -115,8 +115,14 @@ font-size: 15px;
 .article-img-top {
     width: 360px;
     height: 240px;
-    object-fit: cover center;
-   
+    object-fit: cover;
+  
     
+}
+
+.card-img-top{
+    width: 250px;
+    height: 200px;
+    object-fit: cover; 
 }
 
