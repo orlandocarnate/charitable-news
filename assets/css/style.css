@@ -1,22 +1,25 @@
 
 
-/* body {
+ 
+
+ 
+     body{
     background: url('../images/man-hands-reading-boy.jpg') no-repeat;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
     height:100vh;
-        box-sizing:border-box; 
-     overflow-y:hidden; }
-
-     @media (min-width: 992px) { */
+    box-sizing:border-box; 
+     }
+   
+      @media (min-width: 992px) {  
         body {
             background: url('../images/img3.jpg') no-repeat;
             background-size: cover;
             font-family: Arial, Helvetica, sans-serif;
-            
-            
-        } 
-    /* } */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+         }  
     
 
 
@@ -63,7 +66,7 @@ a{
 
 }
 
-.grid-container {
+.container {
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 10px;
