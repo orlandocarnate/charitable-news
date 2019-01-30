@@ -53,6 +53,13 @@ a{
     border: none;
 }
 
+#returnBtn{
+    background-color:  rgba(12, 11, 11, 0.548);
+    display: flex;
+    justify-content: center;
+    
+}
+
 .transition-property{
     border-color: none;
 }
