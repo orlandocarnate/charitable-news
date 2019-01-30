@@ -38,7 +38,7 @@
                     <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
                 </li>
 
-                <li class="nav-item dropdown" id="navDrop">
+                <li class="nav-item dropdown" id="newsDropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         News
@@ -59,7 +59,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown" id="navDrop">
+                <li class="nav-item dropdown" id="charityDropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         Charity
@@ -78,7 +78,21 @@
                         <li><a class="dropdown-item" id="ResearchPolicy" value="11">Research and Public Policy</a></li>
                     </ul>
                 </li>
+               
 
+                <li class="nav-item dropdown" id="favoritesDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Favorites
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li> <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="add" placeholder="Add" aria-label="Add" id="addItem">
+                            <button class="btn my-2 my-sm-0" type="submit" id="favBtn">Add to Favorites</button>
+                        </form></li>
+                </ul>
+
+        </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchItem">
@@ -104,6 +118,7 @@
 
         <div class="articleContainer" id="articleDisplay">
             <div class="articleHolder" id="artHolder"></div>
+            <div class="charityHolder" id="charityInput"></div> <!-- use this to add charity info -->
                 <button class="btn my-2 my-sm-0" type="submit" id="returnBtn">Return</button>
         </div>
 
