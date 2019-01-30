@@ -9,6 +9,7 @@
     font-family: Arial, Helvetica, sans-serif;
     height:100vh;
     box-sizing:border-box; 
+    background-attachment: fixed;
      }
    
       @media (min-width: 992px) {  
@@ -52,6 +53,13 @@ a{
     border: none;
 }
 
+#returnBtn{
+    background-color:  rgba(12, 11, 11, 0.548);
+    display: flex;
+    justify-content: center;
+    
+}
+
 .transition-property{
     border-color: none;
 }
@@ -83,6 +91,15 @@ text-align: center;
 margin: 10px;
 font-size: 15px;
 
+}
+
+#articleDisplay{
+background-color: hsla(0,0%,100%,.3);
+opacity: 0.8;
+padding: 20px;
+text-align: center;
+margin: 10px;
+font-size: 15px;
 }
 
 .searchItem{
