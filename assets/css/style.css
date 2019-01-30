@@ -93,7 +93,8 @@ font-size: 15px;
 }
 
 #articleDisplay{
-background-color: rgba(37, 37, 37, 0.822);
+background-color: black;
+opacity:0.8;
 padding: 20px;
 text-align: center;
 margin: 10px;
@@ -109,5 +110,13 @@ font-size: 15px;
     font-weight: bold;
     
 
+}
+
+.article-img-top {
+    width: 360px;
+    height: 240px;
+    object-fit: cover center;
+   
+    
 }
 
