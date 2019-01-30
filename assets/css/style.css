@@ -93,7 +93,7 @@ font-size: 15px;
 }
 
 #articleDisplay{
-background-color: hsla(0,0%,100%,.3);
+background-color: rgba(8, 7, 7, 0.466);
 opacity: 0.8;
 padding: 20px;
 text-align: center;
@@ -105,5 +105,10 @@ font-size: 15px;
     transition-property: none;
 }
 
+.card-title{
+    font-size: 20px;
+    font-weight: bold;
+    
 
+}
 
