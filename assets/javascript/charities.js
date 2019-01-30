@@ -27,6 +27,7 @@ var newsFinder = {
         newsURL += 'q=' + query;
         newsURL += '&apiKey=e624c791383a46cabe1b19e39ba150f4';
         newsURL += '&pageSize=6';
+        newsURL += '&sortBy=publishedAt';
         $.ajax({
             url: newsURL,
             method: "GET"
@@ -50,8 +51,10 @@ var newsFinder = {
         for (i = 0; i < response.articles.length; i++) {
             $card = $("<div class='grid-item' data-article='" + i + "'>");
             var $img = $("<img class='card-img-top'>").attr({ "src": response.articles[i].urlToImage });
+            var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")"; 
+            //moment(response[i].applicationstartdate, moment.ISO_8601).format("dddd, MMMM Do YYYY");
             var $body = $("<div class='card-body'>");
-            var $title = $("<div class='card-title'>").html(response.articles[i].title);
+            var $title = $("<div class='card-title'>").html(response.articles[i].title + date);
             var $descrip = $("<div class='card-text'>").html(response.articles[i].description);
             // var $content = $("<td>").text(response.articles[i].content);
             var $source = $("<div class='source'>").text(response.articles[i].source.name);
@@ -165,13 +168,14 @@ $("#searchBtn").on("click", function (event) {
 });
 
 // TODO: Listener for Single Article
-$(document).on("click", ".newscard", function (event) {
+$(document).on("click", ".grid-item", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
     console.log(articleNum);
     newsFinder.articleGenerator(articleNum);
 
 });
+
 
     // TODO: Listener for Single Charity
 
