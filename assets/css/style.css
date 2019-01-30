@@ -9,6 +9,7 @@
     font-family: Arial, Helvetica, sans-serif;
     height:100vh;
     box-sizing:border-box; 
+    background-attachment: fixed;
      }
    
       @media (min-width: 992px) {  
@@ -83,6 +84,15 @@ text-align: center;
 margin: 10px;
 font-size: 15px;
 
+}
+
+#articleDisplay{
+background-color: hsla(0,0%,100%,.3);
+opacity: 0.8;
+padding: 20px;
+text-align: center;
+margin: 10px;
+font-size: 15px;
 }
 
 .searchItem{
