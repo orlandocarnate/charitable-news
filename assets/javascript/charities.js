@@ -48,7 +48,7 @@ var newsFinder = {
         console.log("news articles 1: ", response.articles[0].title);
         console.log("news object: ", response);
         for (i = 0; i < response.articles.length; i++) {
-            $card = $("<div class='grid-item card newscard' data-article='" + i + "'>");
+            $card = $("<div class='grid-item col-sm-4 col-lg-4 card' data-article='" + i + "'>");
             var $img = $("<img class='card-img-top'>").attr({ "src": response.articles[i].urlToImage });
             var $body = $("<div class='card-body'>");
             var $title = $("<div class='card-title'>").html(response.articles[i].title);
@@ -63,8 +63,23 @@ var newsFinder = {
     },
 
     articleGenerator: function (item) {
-        // 
         // display single artile using item as an index to get info from newsData
+        // console.log("item: ", item, "newsData: ", newsData, "newsData.articles[item]: ", newsData.articles[item]);
+        var article = newsData.articles[item];
+        // console.log("article object: ",article);
+        console.log("item: ", item);
+        console.log("Title: ", article.title);
+        console.log("content: ", article.content);
+        console.log("source: ", article.source.name);
+
+        var $article = $("<div class='grid-item card newscard' data-article='" + i + "'>");
+        var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage });
+        var $articleBody = $("<div class='article-body'>");
+        var $articleTitle = $("<div class='article-title'>").html(article.title);
+        var $articleContent = $("<div class='article-content'>").html(article.content);
+        var $articleSource = $("<div class='source'>").text(article.source.name);
+
+        $article.append($articleIMG, $articleBody.append($articleTitle, $articleContent, $articleSource));
 
     },
 
@@ -109,8 +124,6 @@ var charityNavigator = {
             charityNavigator.charitiesGenerator(response);
         });
 
-
-
     },
 
     charitiesGenerator: function (response) {
@@ -119,17 +132,17 @@ var charityNavigator = {
             var $name = $("<td>").text(response[i].charityName);
             var $Location = $("<td>").text(response[i].mailingAddress.city + ", " + response[i].mailingAddress.stateOrProvince);
             var $Mission = $("<td>").text(response[i].mission);
-            var $EvaluateURL = $("<td>").html("<a href=" + response[i].charityNavigatorURL + " target='_blank'>Evaluator Link</a>");
+            // var $EvaluateURL = $("<td>").html("<a href=" + response[i].charityNavigatorURL + " target='_blank'>Evaluator Link</a>");
+            // if website is NULL show the charity navigator link instead
             if (response[i].websiteURL !== null) {
                 var $URL = $("<td>").html("<a href=" + response[i].websiteURL + " target='_blank'>Charity Link</a>");
             } else {
-                var $URL = $("<td>").text("Not Available");
+                var $URL = $("<td>").html("<a href=" + response[i].charityNavigatorURL + " target='_blank'>Evaluator Link</a>");
             }
             $table.append($("<tr>").append($name, $Location, $Mission, $EvaluateURL, $URL));
             $("#news").append($table);
         }
     },
-
 
 };
 
@@ -147,18 +160,16 @@ $(".dropdown-item").on("click", function (event) {
 
 $("#searchBtn").on("click", function (event) {
     event.preventDefault();
-
     var query = $("#searchItem").val();
     newsFinder.search(query);
-
-
 });
 
 // TODO: Listener for Single Article
 $(document).on("click", ".newscard", function (event) {
     event.preventDefault();
-    var article = $(this).attr("data-article");
-    alert(article);
+    var articleNum = $(this).attr("data-article");
+    console.log(articleNum);
+    newsFinder.articleGenerator(articleNum);
 
 });
 
