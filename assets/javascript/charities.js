@@ -50,7 +50,7 @@ var newsFinder = {
         console.log("news object: ", response);
         for (i = 0; i < response.articles.length; i++) {
             $card = $("<div class='grid-item' data-article='" + i + "'>");
-            var $img = $("<img class='card-img-top'>").attr({ "src": response.articles[i].urlToImage });
+            var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")"; 
             //moment(response[i].applicationstartdate, moment.ISO_8601).format("dddd, MMMM Do YYYY");
             var $body = $("<div class='card-body'>");
@@ -79,10 +79,10 @@ var newsFinder = {
         console.log("source: ", article.source.name);
 
         var $article = $("<div class='grid-item card newscard' data-article='" + i + "'>");
-        var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage });
-        var $articleBody = $("<div class='article-body'>");
-        var $articleTitle = $("<div class='article-title'>").html(article.title);
-        var $articleContent = $("<div class='article-content'>").html(article.content);
+        var $articleIMG = $("<img class='card-img-top'>").attr({ "src": article.urlToImage });
+        var $articleBody = $("<div class='card-body'>");
+        var $articleTitle = $("<div class='card-title'>").html(article.title);
+        var $articleContent = $("<div class='card-content'>").html(article.content);
         var $articleSource = $("<div class='source'>").text(article.source.name);
 
         $article.append($articleIMG, $articleBody.append($articleTitle, $articleContent, $articleSource));
