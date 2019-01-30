@@ -69,7 +69,8 @@ var newsFinder = {
         $("#articleDisplay").show();
         // display single artile using item as an index to get info from newsData
         // console.log("item: ", item, "newsData: ", newsData, "newsData.articles[item]: ", newsData.articles[item]);
-        $articleDisplay = $("#articleDisplay");
+        // $articleDisplay = $("#articleDisplay");
+        $artHolder = $("#artHolder");
         var article = newsData.articles[item];
         // console.log("article object: ",article);
         console.log("item: ", item);
@@ -85,7 +86,7 @@ var newsFinder = {
         var $articleSource = $("<div class='source'>").text(article.source.name);
 
         $article.append($articleIMG, $articleBody.append($articleTitle, $articleContent, $articleSource));
-        $articleDisplay.append($article);
+        $artHolder.append($article);
 
     },
 
@@ -183,6 +184,7 @@ $(document).on("click", ".grid-item", function (event) {
 // RETURN BUTTON listener
 $(document).on("click", "#returnBtn", function (event){
     event.preventDefault();
+    $("#artHolder").empty();
     $("#articleDisplay").hide();
     $("#gridContainer").show();
 })
