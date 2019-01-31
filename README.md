@@ -2,38 +2,38 @@
 NW Coding Bootcamp Project 1
 
 ## Overview
+*(web app description here)*
 
 ## Pseudocode
-* On First use:
+On the main page if it's a first time user the main content will be empty. If the user was there before and had done a search the page will load news cards based on the last search.
+
 * Dropdown Listener:
-    * When the user uses the dropdown for a category search, an event listener will get the ID and value of the selected drowndown item.
-    * The listener will send the values to the newsfinder.search() method
+    * When the user selects a category from the dropdown list, an event listener will get the ID and value of the selected drowndown item.
+    * The listener will send the values to the `newsfinder.search()` method.
     
 * Search listener:
-* newsFinder Object:
-    * The .search() method will take the input argument and obtain JSON data from the news API using an AJAX function
-        * assigns that to an object called newsresponse.
-        * newsResponse is sent to the newsfinder.newsGenerator() method to create 6 cards based from the newsresponse object.
-    * The .newsGenerator() method runs a FOR loop will loop 6 times to generate 6 news cards that a user can click on.
-    * The .articleGenerator() method is called when a news card is clicked.
+* `newsFinder` Object:
+    * The `.search()` method will take the input argument and obtain JSON data from the news API using an AJAX function
+        * assigns that to an object called `newsresponse`.
+        * `newsResponse` is sent to the `newsfinder.newsGenerator()` method to create 6 cards based from the `newsresponse` object.
+    * The `.newsGenerator()` method runs a FOR loop will loop 6 times to generate 6 news cards that a user can click on.
+    * The `.articleGenerator()` method is called when a news card is clicked.
         * This hides the news cards content
         * Unhides the single article element and populates it with the article img, title, content, and source.
-        * This also calls the charityNavigator.search() method to generate charity cards at the bottom of the article.
+        * This also calls the `charityNavigator.search()` method to generate charity cards at the bottom of the article.
         * If the user clicks on the Return button, the article element is emptied and the news cards are unhidden.
 
-* charityNavigator Object:
-    * The .search() method takes the query string and is used for the AJAX method to obtain 6 charities from the Charity Navigator API and is assigned to the global variable charityData. This is sent to the method charityNavigator.charitiesGenerator method as an input argument.
-    * The .charitiesGenerator() method takes the charityData object.
-        * A For Loop is used to create the cards based on the number of items in the charityData object.
+* `charityNavigator` Object:
+    * The `.search()` method takes the query string and is used for the AJAX method to obtain 6 charities from the Charity Navigator API and is assigned to the global variable `charityData`. This is sent to the method charityNavigator.charitiesGenerator method as an input argument.
+    * The `.charitiesGenerator()` method takes the `charityData` object.
+        * A For Loop is used to create the cards based on the number of items in the `charityData` object.
         * Each card is a clickable link to the charity's URL.
         * If there is no charity URL, the link is replaced with Charity Navigator's review page instead.
 
-
-
 * Firebase for user persistence
-
-
-
+    * **Anonymous Authentication** was used to get a user ID so that the app can save the last search and favorites in the Real-Time Database (RTDB) under their user ID.
+    * The current search item will be set as the last search in the RTDB
+    * When the user adds a favorite, it will be pushed into the RTDB under favorites.
 
 
 ***
