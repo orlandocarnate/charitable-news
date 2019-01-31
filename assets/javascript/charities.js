@@ -33,7 +33,7 @@ var newsFinder = {
             method: "GET"
         }).then(function (newsresponse) {
             console.log("news AJAX: ", newsresponse);
-            newsData = newsresponse; // save newsresponse to global varial newsData to be used later
+            newsData = newsresponse; // save newsresponse to global variable newsData to be used later
             newsFinder.newsGenerator(newsresponse);
         });
 
@@ -171,6 +171,10 @@ $(".dropdown-item").on("click", function (event) {
     catID = $(this).attr("value");
     console.log("ID, CatID: ", selectedID, catID);
     newsFinder.search(selectedID);
+    $("#artHolder").empty();
+    $("#charHolder").empty();
+    $("#articleDisplay").hide();
+    $("#gridContainer").show();
 });
 
 $("#searchBtn").on("click", function (event) {
