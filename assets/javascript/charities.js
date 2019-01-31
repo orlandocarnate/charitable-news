@@ -59,7 +59,7 @@ var newsFinder = {
             // var $content = $("<td>").text(response.articles[i].content);
             var $source = $("<div class='source'>").text(response.articles[i].source.name);
 
-            // var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>Article</a>");
+            // var $url = $("<td>").html("<a href=" + response.articles[i].url + " target='_blank'>article</a>");
             $card.append($img, $body.append($title, $descrip, $source));
             $("#gridContainer").append($card);
         }
@@ -68,11 +68,11 @@ var newsFinder = {
     articleGenerator: function (item) {
         $("#articleDisplay").show();
         // display single artile using item as an index to get info from newsData
-        // console.log("item: ", item, "newsData: ", newsData, "newsData.articles[item]: ", newsData.articles[item]);
-        // $articleDisplay = $("#articleDisplay");
+        // console.log("item: ", item, "newsData: ", newsData, "newsData.charitys[item]: ", newsData.charitys[item]);
+        // $charityDisplay = $("#charityDisplay");
         $artHolder = $("#artHolder");
         var article = newsData.articles[item];
-        // console.log("article object: ",article);
+        // console.log("charity object: ",charity);
         console.log("item: ", item);
         console.log("Title: ", article.title);
         console.log("content: ", article.content);
@@ -128,27 +128,35 @@ var charityNavigator = {
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            charityNavigator.charitiesGenerator(response);
+            charityData = response;
         });
 
     },
 
-    charitiesGenerator: function (response) {
-        var $table = $("<table class='charities'>");
-        for (i = 0; i < response.length; i++) {
-            var $name = $("<td>").text(response[i].charityName);
-            var $Location = $("<td>").text(response[i].mailingAddress.city + ", " + response[i].mailingAddress.stateOrProvince);
-            var $Mission = $("<td>").text(response[i].mission);
-            // var $EvaluateURL = $("<td>").html("<a href=" + response[i].charityNavigatorURL + " target='_blank'>Evaluator Link</a>");
-            // if website is NULL show the charity navigator link instead
-            if (response[i].websiteURL !== null) {
-                var $URL = $("<td>").html("<a href=" + response[i].websiteURL + " target='_blank'>Charity Link</a>");
-            } else {
-                var $URL = $("<td>").html("<a href=" + response[i].charityNavigatorURL + " target='_blank'>Evaluator Link</a>");
-            }
-            $table.append($("<tr>").append($name, $Location, $Mission, $EvaluateURL, $URL));
-            $("#news").append($table);
-        }
+    charitiesGenerator: function (item) {
+        
+        // display single artile using item as an index to get info from newsData
+        // console.log("item: ", item, "newsData: ", newsData, "newsData.charitys[item]: ", newsData.charitys[item]);
+        // $charityDisplay = $("#charityDisplay");
+        $charHolder = $("#charHolder");
+        var charity = charityData[item];
+        // console.log("charity object: ",charity);
+        console.log("item: ", item);
+        console.log("name: ", charity.charityName);
+        console.log("Address: ", charity.mailingAddress.streetAddress1);
+        console.log("Address: ", charity.mailingAddress.city);
+        console.log("Address: ", charity.mailingAddress.stateOrProvince);
+        console.log("URL: ", charity.mailingAddress.charityNavigatorURL);
+
+        var $charity = $("<div class='grid-item card newscard' data-charity='" + i + "'>");
+        var $charityBody = $("<div class='card-body'>");
+        var $charityName = $("<div class='card-title'>").text(charity.charityName);
+        var $charityAddress = $("<div class='card-content'>").text(charity.mailingAddress.streetAddress1 + " " + charity.mailingAddress.city + ", " + charity.mailingAddress.stateOrProvince);
+        var $charityURL = $("<div class='source'>").text(charity.mailingAddress.charityNavigatorURL);
+
+        $charity.append($charityBody.append($charityName, $charityAddress, $charityURL));
+        $charHolder.append($charity);
+
     },
 
 };
@@ -169,15 +177,17 @@ $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     var query = $("#searchItem").val();
     newsFinder.search(query);
+    charityNavigator.search(query);
 });
 
-// TODO: Listener for Single Article
+// TODO: Listener for Single charity and article
 $(document).on("click", ".grid-item", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
     console.log(articleNum);
     $("#gridContainer").hide();
     newsFinder.articleGenerator(articleNum);
+    charityNavigator.charitiesGenerator(articleNum);
 
 });
 
@@ -185,6 +195,7 @@ $(document).on("click", ".grid-item", function (event) {
 $(document).on("click", "#returnBtn", function (event){
     event.preventDefault();
     $("#artHolder").empty();
+    $("#charHolder").empty();
     $("#articleDisplay").hide();
     $("#gridContainer").show();
 })
