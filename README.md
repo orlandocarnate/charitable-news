@@ -1,6 +1,13 @@
 # [Project 1](https://awilmoth.github.io/project1/)
 NW Coding Bootcamp Project 1
 
+## Overview
+
+## Psuedocode
+* On First use:
+    * If user uses the dropdown for a category search, an event listener will get the ID and value of the selected drowndown item.
+    * The 
+
 
 ***
 ## Firebase notes
