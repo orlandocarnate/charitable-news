@@ -3,13 +3,11 @@ NW Coding Bootcamp Project 1
 
 ## Overview
 
-## Psuedocode
+## Pseudocode
 * On First use:
 * Dropdown Listener:
     * When the user uses the dropdown for a category search, an event listener will get the ID and value of the selected drowndown item.
     * The listener will send the values to the newsfinder.search() method
-    
-    
     
 * Search listener:
 * newsFinder Object:
@@ -24,7 +22,12 @@ NW Coding Bootcamp Project 1
         * If the user clicks on the Return button, the article element is emptied and the news cards are unhidden.
 
 * charityNavigator Object:
-    * The .search() method takes the query string and is used for the AJAX method to obtain 6 charities from the Charity Navigator API.
+    * The .search() method takes the query string and is used for the AJAX method to obtain 6 charities from the Charity Navigator API and is assigned to the global variable charityData. This is sent to the method charityNavigator.charitiesGenerator method as an input argument.
+    * The .charitiesGenerator() method takes the charityData object.
+        * A For Loop is used to create the cards based on the number of items in the charityData object.
+        * Each card is a clickable link to the charity's URL.
+        * If there is no charity URL, the link is replaced with Charity Navigator's review page instead.
+
 
 
 * Firebase for user persistence
