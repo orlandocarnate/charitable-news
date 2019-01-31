@@ -33,7 +33,7 @@ var newsFinder = {
             method: "GET"
         }).then(function (newsresponse) {
             console.log("news AJAX: ", newsresponse);
-            newsData = newsresponse; // save newsresponse to global varial newsData to be used later
+            newsData = newsresponse; // save newsresponse to global variable newsData to be used later
             newsFinder.newsGenerator(newsresponse);
         });
 
@@ -79,7 +79,7 @@ var newsFinder = {
         console.log("source: ", article.source.name);
 
         var $article = $("<div class='grid-item card newscard' data-article='" + i + "'>");
-        var $articleIMG = $("<img class='card-img-top'>").attr({ "src": article.urlToImage });
+        var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage, "style": "text-align: center" });
         var $articleBody = $("<div class='card-body'>");
         var $articleTitle = $("<div class='card-title'>").html(article.title);
         var $articleContent = $("<div class='card-content'>").html(article.content);
@@ -171,6 +171,10 @@ $(".dropdown-item").on("click", function (event) {
     catID = $(this).attr("value");
     console.log("ID, CatID: ", selectedID, catID);
     newsFinder.search(selectedID);
+    $("#artHolder").empty();
+    $("#charHolder").empty();
+    $("#articleDisplay").hide();
+    $("#gridContainer").show();
 });
 
 $("#searchBtn").on("click", function (event) {
