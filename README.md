@@ -1,12 +1,16 @@
-# [Project 1](https://awilmoth.github.io/project1/)
-NW Coding Bootcamp Project 1
+# [News & Charities app *name in progress*](http://charitable-news.com/)
 
-## Overview
-*(web app description here)*
+## Project Description
+An app that allows Chicagoans to read local news pertinent to the city while being informed about related events/charity organizations. The objective is to build communities of socially responsible citizens who do not just passively consume news- but take actionable steps towards making Chicago a better city. 
+
+* Links:
+    * Deployed Website: http://charitable-news.com/
+    * Github Pages: https://awilmoth.github.io/project1/
+    * Github Repository: https://github.com/awilmoth/project1
 
 ## API's used
 
-### News API
+### [News API](https://newsapi.org/)
 [News API](https://newsapi.org/) was usedto obtain news articles.
 * Below is the query string used for the AJAX call.
 ```
@@ -27,7 +31,7 @@ $.ajax({
 });
 ```
 
-### Charity Navigator API
+### [Charity Navigator API](https://charity.3scale.net/)
 [Charity Navigator API](https://charity.3scale.net/) from [Charity Navigator](https://www.charitynavigator.org/) was used to obtain charities.
 * Below is the query string and AJAX used to get the information:
 ```
