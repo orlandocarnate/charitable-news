@@ -258,8 +258,9 @@ $(document).on("click", "#returnBtn", function (event) {
 $(document).on("click", ".savedFavBtn", function (event) {
     event.preventDefault();
     var query = $(this).attr("data-item");
+    console.log("data-item: ", query);
     newsFinder.search(query);
-    charityNavigator.search(query);
+    // charityNavigator.search(query);
 });
 
 
