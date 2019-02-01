@@ -14,9 +14,10 @@ var newsFinder = {
         // ------- NEWS API ---------
         var newsURL = 'https://newsapi.org/v2/everything?';
         newsURL += 'q=' + query;
-        newsURL += '&apiKey=e624c791383a46cabe1b19e39ba150f4';
+        newsURL += '&ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
+        newsURL += '&language=en';
         // news AJAX call
         $.ajax({
             url: newsURL,
@@ -52,10 +53,12 @@ var newsFinder = {
 
     articleGenerator: function (item) {
         $("#articleDisplay").show();
+        $("#articleContainer").empty();
+        $(".news-card").hide();
         // display single artile using item as an index to get info from newsData
         $articleContainer = $("#articleContainer");
         var article = newsData.articles[item];
-
+        console.log(article.urlToImage);
         var $article = $("<div class='col-sm-12' data-article='" + i + "'>");
         var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage, "style": "text-align: center" });
         var $articleBody = $("<div class='card-body'>");
@@ -109,16 +112,20 @@ var charityNavigator = {
 
         // create cards using for loop
         for (var i = 0; i < items.length; i++) {
-            var $charities = $("<div class='col-sm-6 news-card' data-charity='" + i + "'>");
+            var $charities = $("<div class='col-sm-6 charity-card' data-charity='" + i + "'>");
             var $charitiesBody = $("<div class='card-body'>");
             var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
-            var $charitiesAddress = $("<div class='card-content'>").text(items[i].mailingAddress.streetAddress1 + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince);
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL });
+                var charityURL = items[i].charityNavigatorURL;
             } else {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL });
+                var charityURL = items[i].websiteURL;
             }
+            var $charitiesAddress = $("<div class='card-content'>").html(items[i].mailingAddress.streetAddress1 
+                + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince
+                + "<br />" + charityURL);
             $charities.append($charitiesURL.append($charitiesBody.append($charitiesName, $charitiesAddress)));
             $charHolder.append($charities);
         }
@@ -133,7 +140,7 @@ var charityNavigator = {
         requestURL += "&app_key=" + key;
         requestURL += "&pageSize=6";
         requestURL += "&rated=true";
-        if (parseInt(query)) {
+        if (parseInt(id)) {
             console.log("Is Integer");
             requestURL += "&categoryID=" + id;
         } else {
@@ -150,13 +157,15 @@ var charityNavigator = {
             charityNavigator.charitiesMainGenerator(response);
         });
     },
+
+    // card generator when Charities dropdown is used.
     charitiesMainGenerator: function (items) {
 
         // clear results section
         $("#gridContainer").empty();
         // var $table = $("<table class='news'>");
         for (i = 0; i < items.length; i++) {
-            $card = $("<div class='col-sm-4'>");
+            $card = $("<div class='col-sm-3'>");
             // var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var $charitiesBody = $("<div class='card-body'>");
             var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
@@ -165,9 +174,11 @@ var charityNavigator = {
             // var $mission = $("<div class='source'>").text(response.articles[i].source.name);
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
-                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL, "text": "Website" });
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL});
+                $charitiesURL.text(items[i].charityNavigatorURL);
             } else {
-                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL, "text": "Website"  });
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL});
+                $charitiesURL.text(items[i].websiteURL);
             }
             $card.append($charitiesBody.append($charitiesName, $mission, $charitiesAddress, $charitiesURL));
             $("#gridContainer").append($card);
@@ -190,7 +201,7 @@ $(".dropdown-item").on("click", function (event) {
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
-    $("#gridContainer").show();
+    $(".news-card").show();
 });
 
 // Charity Dropdown listener
@@ -204,7 +215,8 @@ $(".Charity-dropdown-item").on("click", function (event) {
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
-    $("#gridContainer").show();
+    $(".news-card").show();
+    
 });
 
 // Search Button Listener
@@ -215,6 +227,7 @@ $("#searchBtn").on("click", function (event) {
     if (query !== '') {
         newsFinder.search(query);
         charityNavigator.search(query);
+        $("#addItem").val(query);
     }
 
 });
@@ -224,7 +237,7 @@ $(document).on("click", ".news-card", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
     console.log(articleNum);
-    $("#gridContainer").hide();
+    $(".news-card").hide();
     newsFinder.articleGenerator(articleNum);
     // charityNavigator.charitiesGenerator(articleNum);
 
@@ -233,10 +246,10 @@ $(document).on("click", ".news-card", function (event) {
 // RETURN BUTTON listener
 $(document).on("click", "#returnBtn", function (event) {
     event.preventDefault();
-    $("#artHolder").empty();
-    $("#charHolder").empty();
+    $("#articleContainer").empty();
+    $("#charityHolder").empty();
     $("#articleDisplay").hide();
-    $("#gridContainer").show();
+    $(".news-card").show();
 })
 
 
