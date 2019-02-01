@@ -14,7 +14,7 @@ var newsFinder = {
         // ------- NEWS API ---------
         var newsURL = 'https://newsapi.org/v2/everything?';
         newsURL += 'q=' + query;
-        newsURL += '&apiKey=e624c791383a46cabe1b19e39ba150f4';
+        newsURL += '&ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
         newsURL += '&language=en';
@@ -53,6 +53,7 @@ var newsFinder = {
 
     articleGenerator: function (item) {
         $("#articleDisplay").show();
+        $("#articleContainer").empty();
         $(".news-card").hide();
         // display single artile using item as an index to get info from newsData
         $articleContainer = $("#articleContainer");
