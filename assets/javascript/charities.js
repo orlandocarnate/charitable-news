@@ -231,7 +231,6 @@ $("#searchBtn").on("click", function (event) {
         charityNavigator.search(query);
         $("#addItem").val(query);
     }
-
 });
 
 // News Card Listener
