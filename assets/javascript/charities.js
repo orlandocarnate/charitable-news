@@ -35,7 +35,7 @@ var newsFinder = {
         $("#gridContainer").empty();
         // var $table = $("<table class='news'>");
         for (i = 0; i < response.articles.length; i++) {
-            $card = $("<div class='col-sm-12 col-md-4 news-card card' data-article='" + i + "'>");
+            $card = $("<div class='col-sm-4' data-article='" + i + "'>");
             var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")";
             var $body = $("<div class='card-body'>");
