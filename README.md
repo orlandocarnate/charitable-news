@@ -4,6 +4,51 @@ NW Coding Bootcamp Project 1
 ## Overview
 *(web app description here)*
 
+## API's used
+
+### News API
+[News API](https://newsapi.org/) was usedto obtain news articles.
+* Below is the query string used for the AJAX call.
+```
+var newsURL = 'https://newsapi.org/v2/everything?';
+newsURL += 'q=' + query;
+newsURL += '&apiKey=<YOUR API KEY HERE';
+newsURL += '&pageSize=6';
+newsURL += '&sortBy=publishedAt';
+newsURL += '&language=en';
+// news AJAX call
+$.ajax({
+    url: newsURL,
+    method: "GET"
+}).then(function (newsresponse) {
+    console.log("news AJAX: ", newsresponse);
+    newsData = newsresponse; // save newsresponse to global variable newsData to be used later
+    newsFinder.newsGenerator(newsresponse, query);
+});
+```
+
+### Charity Navigator API
+[Charity Navigator API](https://charity.3scale.net/) from [Charity Navigator](https://www.charitynavigator.org/) was used to obtain charities.
+* Below is the query string and AJAX used to get the information:
+```
+var requestURL = "https://api.data.charitynavigator.org/v2/Organizations";
+requestURL += "?app_id=<YOUR APP ID>";
+requestURL += "&app_key=<YOUR API KEY>";
+requestURL += "&pageSize=6";
+requestURL += "&rated=true";
+requestURL += "&search=" + query;
+requestURL += "&categoryID=" + id;
+
+// charity AJAX call
+$.ajax({
+    url: requestURL,
+    method: "GET"
+}).then(function (response) {
+    console.log("Charities Search: ", response);
+    charityNavigator.charitiesGenerator(response);
+});
+```
+
 ## Pseudocode
 On the main page if it's a first time user the main content will be empty. If the user was there before and had done a search the page will load news cards based on the last search.
 
