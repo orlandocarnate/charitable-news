@@ -136,10 +136,10 @@ var charityNavigator = {
             var $charitiesName = $("<div class='card-title'>").text(charityData[i].charityName);
             var $charitiesAddress = $("<div class='card-content'>").text(charityData[i].mailingAddress.streetAddress1 + " " + charityData[i].mailingAddress.city + ", " + charityData[i].mailingAddress.stateOrProvince);
             // if there is no URL then use Charity Navigator URL
-            if (charityData[i].mailingAddress.websiteURL === null) {
-                var $charitiesURL = $("<a class='website'>").attr("href", charityData[i].mailingAddress.charityNavigatorURL);
+            if (charityData[i].websiteURL === null) {
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({"href": "'" + charityData[i].charityNavigatorURL + "'"});
             } else {
-                var $charitiesURL = $("<a class='website'>").attr("href", charityData[i].mailingAddress.websiteURL);
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({"href": "'" + charityData[i].websiteURL + "'"});
             }
             $charities.append($charitiesURL.append($charitiesBody.append($charitiesName, $charitiesAddress)));
             $charHolder.append($charities);
