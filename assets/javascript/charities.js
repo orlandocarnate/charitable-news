@@ -6,6 +6,7 @@ var charitySearch;
 // var charityData;
 var searchQuery;
 
+$("#articleDisplay").hide();
 // news object & API
 var newsFinder = {
 
