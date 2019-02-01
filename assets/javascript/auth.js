@@ -39,11 +39,12 @@ $(document).ready(function () {
         }
     });
 
-    // User listener - retreives user's saved preferences
+    // User listener - retreives user's saved preferences and favorites
     database.ref("/users").on("value", function (userSnapshot) {
         console.log("Query exists? ", userSnapshot.child(user_UID).child("query").exists());
         console.log("CatID exists? ", userSnapshot.child(user_UID).child("query").exists());
         console.log("userID saved? ", userSnapshot.child(user_UID).exists());
+        console.log("Favorites saved? ", userSnapshot.child(user_UID).child("favorites").val());
         // if (userSnapshot.child(user_UID).exists()) {
         // console.log("user ID: ", userSnapshot.child(user_UID));
         // };
@@ -51,6 +52,17 @@ $(document).ready(function () {
             console.log("lastsearch: ", userSnapshot.child(user_UID).val().lastsearch);
             query = userSnapshot.child(user_UID).val().lastsearch;
             newsFinder.search(query);
+        };
+        if (userSnapshot.child(user_UID).child("favorites").exists()) {
+            console.log("favorites: ", userSnapshot.child(user_UID).child("favorites").val());
+            var favs = userSnapshot.child(user_UID).child("favorites").val();
+            console.log("fav len", Object.keys(favs));
+            // https://stackoverflow.com/questions/684672/how-do-i-loop-through-or-enumerate-a-javascript-object
+            Object.keys(favs).forEach(function(key) {
+                console.log("favorite:", favs[key].favorite);
+                var $fav = $("<button class='btn savedFavBtn'><a class='fav-dropdown-item' id='" + favs[key].favorite + "'>" + favs[key].favorite + "</a></button>");
+                $(".sidebar").append($fav);
+            })
         };
 
     });
@@ -83,18 +95,29 @@ $(document).ready(function () {
 
     });
 
+    // search button listener
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
+        var searchItem = $("#searchItem").val();
         if (searchItem !== '') {
             database.ref("/users").child(user_UID).update({ lastsearch: searchItem });
+
+
         }
-
-        // var catID = $("#category-id option:selected").val();
-        // console.log("catID: ", catID);
-        // if (query !== "") {
-        // charityNavigator.search(query, catID);
-        // }
-
     });
 
+    // favBtn listener
+    $("#favBtn").on("click", function (event) {
+        event.preventDefault();
+        var addFav = $("#addItem").val().trim();
+        if (addFav !== '') {
+            database.ref("/users").child(user_UID).child("favorites").push({ favorite: addFav });
+
+        }
+    })
+
+
+
 });
+
+{/* <li><a class="fav-dropdown-item" id='" + favorite + "' value="3">Education</a></li> */ }

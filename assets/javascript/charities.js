@@ -52,10 +52,11 @@ var newsFinder = {
 
     articleGenerator: function (item) {
         $("#articleDisplay").show();
+        $(".news-card").hide();
         // display single artile using item as an index to get info from newsData
         $articleContainer = $("#articleContainer");
         var article = newsData.articles[item];
-
+        console.log(article.urlToImage);
         var $article = $("<div class='col-sm-12' data-article='" + i + "'>");
         var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage, "style": "text-align: center" });
         var $articleBody = $("<div class='card-body'>");
@@ -156,7 +157,7 @@ var charityNavigator = {
         $("#gridContainer").empty();
         // var $table = $("<table class='news'>");
         for (i = 0; i < items.length; i++) {
-            $card = $("<div class='col-sm-4'>");
+            $card = $("<div class='col-sm-3'>");
             // var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var $charitiesBody = $("<div class='card-body'>");
             var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
@@ -190,7 +191,7 @@ $(".dropdown-item").on("click", function (event) {
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
-    $("#gridContainer").show();
+    $(".news-card").show();
 });
 
 // Charity Dropdown listener
@@ -204,7 +205,8 @@ $(".Charity-dropdown-item").on("click", function (event) {
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
-    $("#gridContainer").show();
+    $(".news-card").show();
+    
 });
 
 // Search Button Listener
@@ -215,6 +217,7 @@ $("#searchBtn").on("click", function (event) {
     if (query !== '') {
         newsFinder.search(query);
         charityNavigator.search(query);
+        $("#addItem").val(query);
     }
 
 });
@@ -224,7 +227,7 @@ $(document).on("click", ".news-card", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
     console.log(articleNum);
-    $("#gridContainer").hide();
+    $(".news-card").hide();
     newsFinder.articleGenerator(articleNum);
     // charityNavigator.charitiesGenerator(articleNum);
 
@@ -233,10 +236,10 @@ $(document).on("click", ".news-card", function (event) {
 // RETURN BUTTON listener
 $(document).on("click", "#returnBtn", function (event) {
     event.preventDefault();
-    $("#artHolder").empty();
-    $("#charHolder").empty();
+    $("#articleContainer").empty();
+    $("#charityHolder").empty();
     $("#articleDisplay").hide();
-    $("#gridContainer").show();
+    $(".news-card").show();
 })
 
 
