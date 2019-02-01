@@ -3,7 +3,6 @@
 var catID;
 var newsData;
 var charitySearch;
-// var charityData;
 var searchQuery;
 
 $("#articleDisplay").hide();
@@ -14,20 +13,35 @@ var newsFinder = {
         searchQuery = query;
         // ------- NEWS API ---------
         var newsURL = 'https://newsapi.org/v2/everything?'; // everything
-        // var newsURL = 'https://newsapi.org/v2/top-headlines?'; // TOP HEADLINES
         newsURL += 'ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
-
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
         newsURL += '&language=en';
-
         // Everything queries
         newsURL += '&q=' + query;
 
-        // Top Headline Queries:
-        // newsURL += '&country=us';
-        // newsURL += '&category=' + query;
+        // news AJAX call
+        $.ajax({
+            url: newsURL,
+            method: "GET"
+        }).then(function (newsresponse) {
+            console.log("news AJAX: ", newsresponse);
+            newsData = newsresponse; // save newsresponse to global variable newsData to be used later
+            newsFinder.newsGenerator(newsresponse, query);
+        });
+    },
 
+    searchHeadlines: function (query) {
+        searchQuery = query;
+        // ------- NEWS API ---------
+        var newsURL = 'https://newsapi.org/v2/top-headlines?'; // TOP HEADLINES
+        newsURL += 'ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
+        newsURL += '&pageSize=6';
+        newsURL += '&sortBy=publishedAt';
+        newsURL += '&language=en';
+        // Top Headline Queries:
+        newsURL += '&country=us';
+        newsURL += '&category=' + query;
 
         // news AJAX call
         $.ajax({
@@ -208,7 +222,8 @@ $(".dropdown-item").on("click", function (event) {
     var selectedID = $(this).attr("id");
     catID = $(this).attr("value");
     console.log("ID, CatID: ", selectedID, catID);
-    newsFinder.search(selectedID);
+    newsFinder.search(selectedID); // Everything Search
+    // newsFinder.searchHeadlines(selectedID); // Headlines by Category search
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
@@ -270,6 +285,10 @@ $(document).on("click", ".savedFavBtn", function (event) {
     var query = $(this).attr("data-item");
     console.log("data-item: ", query);
     newsFinder.search(query);
+    $("#artHolder").empty();
+    $("#charHolder").empty();
+    $("#articleDisplay").hide();
+    $(".news-card").show();
     // charityNavigator.search(query);
 });
 
@@ -277,7 +296,3 @@ $(document).on("click", ".savedFavBtn", function (event) {
 $("form").submit(function(event) {
     event.preventDefault();
 });
-
-    // TODO: Listener for Single Charity
-
-// });
