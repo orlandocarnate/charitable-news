@@ -61,7 +61,7 @@ $(document).ready(function () {
             $("#fav-items").empty();
             Object.keys(favs).forEach(function(key) {
                 console.log("favorite:", favs[key].favorite);
-                var $fav = $("<button class='btn savedFavBtn'><a class='fav-dropdown-item' id='" + favs[key].favorite + "'>" + favs[key].favorite + "</a></button>");
+                var $fav = $("<button class='btn savedFavBtn' data-item='" + favs[key].favorite + "'><a class='fav-dropdown-item'>" + favs[key].favorite + "</a></button>");
                 $("#fav-items").append($fav);
             })
         };
