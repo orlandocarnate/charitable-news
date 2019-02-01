@@ -35,15 +35,17 @@ var newsFinder = {
         $("#gridContainer").empty();
         // var $table = $("<table class='news'>");
         for (i = 0; i < response.articles.length; i++) {
-            $card = $("<div class='col-sm-4' data-article='" + i + "'>");
+            $card = $("<div class='col-sm-3 news-card' data-article='" + i + "'>");
+            // $cardWrapper = $("<div class='wrapper'>");
             var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")";
             var $body = $("<div class='card-body'>");
             var $title = $("<div class='card-title'>").html(response.articles[i].title + date);
             var $descrip = $("<div class='card-text'>").html(response.articles[i].description);
             var $source = $("<div class='source'>").text(response.articles[i].source.name);
-
             $card.append($img, $body.append($title, $descrip, $source));
+            // $cardWrapper.append($img, $body.append($title, $descrip, $source));
+            // $card.append($cardWrapper);
             $("#gridContainer").append($card);
         }
     },
@@ -107,7 +109,7 @@ var charityNavigator = {
 
         // create cards using for loop
         for (var i = 0; i < items.length; i++) {
-            var $charities = $("<div class='col-sm-6' data-charity='" + i + "'>");
+            var $charities = $("<div class='col-sm-6 news-card' data-charity='" + i + "'>");
             var $charitiesBody = $("<div class='card-body'>");
             var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
             var $charitiesAddress = $("<div class='card-content'>").text(items[i].mailingAddress.streetAddress1 + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince);
@@ -217,7 +219,7 @@ $("#searchBtn").on("click", function (event) {
 
 });
 
-// TODO: Listener for Single charity and article
+// News Card Listener
 $(document).on("click", ".news-card", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
