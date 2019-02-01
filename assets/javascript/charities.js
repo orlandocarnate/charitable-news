@@ -2,45 +2,33 @@
 // Global Variables
 var catID;
 var newsData;
-var charityData;
+// var charityData;
+var searchQuery;
 
 // news object & API
 var newsFinder = {
 
     search: function (query) {
+        searchQuery = query;
         // ------- NEWS API ---------
-        /* 
-        var url = 'https://newsapi.org/v2/everything?' +
-            //'country=us&' +
-            'q=' +
-            query +
-            '&apiKey=e624c791383a46cabe1b19e39ba150f4';
-        var req = new Request(url);
-        fetch(req)
-            .then(function (response) {
-                console.log(response.json());
-            });
-        */
-
-        // news AJAX call
         var newsURL = 'https://newsapi.org/v2/everything?';
         newsURL += 'q=' + query;
         newsURL += '&apiKey=e624c791383a46cabe1b19e39ba150f4';
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
+        // news AJAX call
         $.ajax({
             url: newsURL,
             method: "GET"
         }).then(function (newsresponse) {
             console.log("news AJAX: ", newsresponse);
             newsData = newsresponse; // save newsresponse to global variable newsData to be used later
-            newsFinder.newsGenerator(newsresponse);
+            newsFinder.newsGenerator(newsresponse, query);
         });
-
         // --------- /NEWS -----------
     },
 
-    newsGenerator: function (response) {
+    newsGenerator: function (response, query) {
 
         // clear results section
         $("#gridContainer").empty();
@@ -88,14 +76,16 @@ var newsFinder = {
         $article.append($articleIMG, $articleBody.append($articleTitle, $articleContent, $articleSource));
         $artHolder.append($article);
 
+        // call the charities generator method
+        charityNavigator.search(searchQuery);  // selectedID is a Global Var
     },
 
 };
 
-
 // charity navigator object API https://charity.3scale.net/
 var charityNavigator = {
     search: function (query) {
+        var charityData;
         var appID = "4dd27455";
         var key = 'd86a037d4ea3f2785abba1684a1e4bfd'; // key
         var requestURL = "https://api.data.charitynavigator.org/v2/Organizations";
@@ -106,18 +96,6 @@ var charityNavigator = {
         //     requestURL += "&search=" + query;
         // }
         requestURL += "&search=" + query;
-        // requestURL += "&categoryID=" + query;
-        // requestURL += "&rated=true";
-        // requestURL += "&fundraisingOrgs=true";
-        // requestURL += "&state=IL";
-        // requestURL += "&city=chicago";
-        // requestURL += "&zip=60608";
-        // requestURL += "&minRating=1";
-        // requestURL += "&maxRating=3";
-        // requestURL += "&sizeRange=1";
-        // requestURL += "&donorPrivacy=true";
-        // requestURL += "&scopeOfWork=REGIONAL"; // very limited
-        // requestURL += "&sort=RATING";
         // if (id !== "") {
         //     requestURL += "&categoryID=" + id;
         // }
@@ -127,35 +105,46 @@ var charityNavigator = {
             url: requestURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            console.log("Charities Search: ",response);
             charityData = response;
+            charityNavigator.charitiesGenerator(charityData);
         });
+        
 
     },
 
-    charitiesGenerator: function (item) {
+    charitiesGenerator: function (charityData) {
+        console.log("CharGen: ", charityData);
         
         // display single artile using item as an index to get info from newsData
         // console.log("item: ", item, "newsData: ", newsData, "newsData.charitys[item]: ", newsData.charitys[item]);
         // $charityDisplay = $("#charityDisplay");
         $charHolder = $("#charHolder");
-        var charity = charityData[item];
+        // var charity = charityData[item];
         // console.log("charity object: ",charity);
-        console.log("item: ", item);
-        console.log("name: ", charity.charityName);
-        console.log("Address: ", charity.mailingAddress.streetAddress1);
-        console.log("Address: ", charity.mailingAddress.city);
-        console.log("Address: ", charity.mailingAddress.stateOrProvince);
-        console.log("URL: ", charity.mailingAddress.charityNavigatorURL);
+        // console.log("item: ", item);
+        // console.log("name: ", charity.charityName);
+        // console.log("Address: ", charity.mailingAddress.streetAddress1);
+        // console.log("Address: ", charity.mailingAddress.city);
+        // console.log("Address: ", charity.mailingAddress.stateOrProvince);
+        // console.log("URL: ", charity.mailingAddress.charityNavigatorURL);
 
-        var $charity = $("<div class='grid-item card newscard' data-charity='" + i + "'>");
-        var $charityBody = $("<div class='card-body'>");
-        var $charityName = $("<div class='card-title'>").text(charity.charityName);
-        var $charityAddress = $("<div class='card-content'>").text(charity.mailingAddress.streetAddress1 + " " + charity.mailingAddress.city + ", " + charity.mailingAddress.stateOrProvince);
-        var $charityURL = $("<div class='source'>").text(charity.mailingAddress.charityNavigatorURL);
+        // create cards using for loop
+        for (var i=0; i < charityData.length; i++) {
+            var $charities = $("<div class='grid-item card charity-card' data-charity='" + i + "'>");
+            var $charitiesBody = $("<div class='card-body'>");
+            var $charitiesName = $("<div class='card-title'>").text(charityData[i].charityName);
+            var $charitiesAddress = $("<div class='card-content'>").text(charityData[i].mailingAddress.streetAddress1 + " " + charityData[i].mailingAddress.city + ", " + charityData[i].mailingAddress.stateOrProvince);
+            // if there is no URL then use Charity Navigator URL
+            if (charityData[i].mailingAddress.websiteURL === null) {
+                var $charitiesURL = $("<a class='website'>").attr("href", charityData[i].mailingAddress.charityNavigatorURL);
+            } else {
+                var $charitiesURL = $("<a class='website'>").attr("href", charityData[i].mailingAddress.websiteURL);
+            }
+            $charities.append($charitiesURL.append($charitiesBody.append($charitiesName, $charitiesAddress)));
+            $charHolder.append($charities);
+        }
 
-        $charity.append($charityBody.append($charityName, $charityAddress, $charityURL));
-        $charHolder.append($charity);
 
     },
 
@@ -179,9 +168,13 @@ $(".dropdown-item").on("click", function (event) {
 
 $("#searchBtn").on("click", function (event) {
     event.preventDefault();
-    var query = $("#searchItem").val();
-    newsFinder.search(query);
-    charityNavigator.search(query);
+    var query = $("#searchItem").val().trim();
+    // validatation conditional
+    if (query !== '') {
+        newsFinder.search(query);
+        charityNavigator.search(query);
+    }
+
 });
 
 // TODO: Listener for Single charity and article
@@ -191,7 +184,7 @@ $(document).on("click", ".grid-item", function (event) {
     console.log(articleNum);
     $("#gridContainer").hide();
     newsFinder.articleGenerator(articleNum);
-    charityNavigator.charitiesGenerator(articleNum);
+    // charityNavigator.charitiesGenerator(articleNum);
 
 });
 
