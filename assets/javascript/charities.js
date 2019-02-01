@@ -12,12 +12,22 @@ var newsFinder = {
     search: function (query) {
         searchQuery = query;
         // ------- NEWS API ---------
-        var newsURL = 'https://newsapi.org/v2/everything?';
-        newsURL += 'q=' + query;
-        newsURL += '&ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
+        var newsURL = 'https://newsapi.org/v2/everything?'; // everything
+        // var newsURL = 'https://newsapi.org/v2/top-headlines?'; // TOP HEADLINES
+        newsURL += 'ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
+
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
         newsURL += '&language=en';
+
+        // Everything queries
+        newsURL += '&q=' + query;
+
+        // Top Headline Queries:
+        // newsURL += '&country=us';
+        // newsURL += '&category=' + query;
+
+
         // news AJAX call
         $.ajax({
             url: newsURL,
@@ -123,7 +133,7 @@ var charityNavigator = {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL });
                 var charityURL = items[i].websiteURL;
             }
-            var $charitiesAddress = $("<div class='card-content'>").html(items[i].mailingAddress.streetAddress1 
+            var $charitiesAddress = $("<div class='card-content'>").html(items[i].mailingAddress.streetAddress1
                 + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince
                 + "<br />" + charityURL);
             $charities.append($charitiesURL.append($charitiesBody.append($charitiesName, $charitiesAddress)));
@@ -174,10 +184,10 @@ var charityNavigator = {
             // var $mission = $("<div class='source'>").text(response.articles[i].source.name);
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
-                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL});
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL });
                 $charitiesURL.text(items[i].charityNavigatorURL);
             } else {
-                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL});
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL });
                 $charitiesURL.text(items[i].websiteURL);
             }
             $card.append($charitiesBody.append($charitiesName, $mission, $charitiesAddress, $charitiesURL));
@@ -202,13 +212,14 @@ $(".dropdown-item").on("click", function (event) {
     $("#charHolder").empty();
     $("#articleDisplay").hide();
     $(".news-card").show();
+    $("#addItem").val(selectedID); // send search item to favorites input text box.
 });
 
 // Charity Dropdown listener
 $(".Charity-dropdown-item").on("click", function (event) {
     event.preventDefault();
     // get value of 'this' selected dropdown
-    // var selectedID = $(this).attr("id");
+    var selectedID = $(this).attr("id");
     catID = $(this).attr("value");
     console.log("CatID: ", catID);
     charityNavigator.searchByCategory(catID);
@@ -216,7 +227,8 @@ $(".Charity-dropdown-item").on("click", function (event) {
     $("#charHolder").empty();
     $("#articleDisplay").hide();
     $(".news-card").show();
-    
+    $("#addItem").val(selectedID); // send search item to favorites input text box.
+
 });
 
 // Search Button Listener
@@ -229,7 +241,6 @@ $("#searchBtn").on("click", function (event) {
         charityNavigator.search(query);
         $("#addItem").val(query);
     }
-
 });
 
 // News Card Listener
@@ -251,6 +262,15 @@ $(document).on("click", "#returnBtn", function (event) {
     $("#articleDisplay").hide();
     $(".news-card").show();
 })
+
+// Saved Favorites Button Listener
+$(document).on("click", ".savedFavBtn", function (event) {
+    event.preventDefault();
+    var query = $(this).attr("data-item");
+    console.log("data-item: ", query);
+    newsFinder.search(query);
+    // charityNavigator.search(query);
+});
 
 
     // TODO: Listener for Single Charity
