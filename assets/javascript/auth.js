@@ -120,5 +120,3 @@ $(document).ready(function () {
 
 
 });
-
-{/* <li><a class="fav-dropdown-item" id='" + favorite + "' value="3">Education</a></li> */ }
