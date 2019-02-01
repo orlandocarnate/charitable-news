@@ -95,17 +95,18 @@ a{
     /* grid-template-columns: auto auto auto; */
     padding: 10px;
     
+    
  
 }
 
 .col-sm-3 {
 background-color: hsla(0,0%,100%,.3);
 opacity: 0.8;
-padding: 20px;
-font-size: 30px;
+padding: 10px;
 text-align: center;
 margin: 10px;
 font-size: 15px;
+
 
 } 
 
