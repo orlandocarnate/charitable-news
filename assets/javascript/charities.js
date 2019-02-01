@@ -233,7 +233,7 @@ $(".Charity-dropdown-item").on("click", function (event) {
 
 // Search Button Listener
 $("#searchBtn").on("click", function (event) {
-    event.preventDefault();
+    // event.preventDefault();
     var query = $("#searchItem").val().trim();
     // validatation conditional
     if (query !== '') {
@@ -272,6 +272,10 @@ $(document).on("click", ".savedFavBtn", function (event) {
     // charityNavigator.search(query);
 });
 
+// turn off ALL Form Submit events.
+$("form").submit(function(event) {
+    event.preventDefault();
+});
 
     // TODO: Listener for Single Charity
 

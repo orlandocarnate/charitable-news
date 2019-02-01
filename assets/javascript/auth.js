@@ -98,7 +98,7 @@ $(document).ready(function () {
 
     // search button listener
     $("#searchBtn").on("click", function (event) {
-        event.preventDefault();
+        // event.preventDefault();
         var searchItem = $("#searchItem").val();
         if (searchItem !== '') {
             database.ref("/users").child(user_UID).update({ lastsearch: searchItem });
@@ -109,7 +109,7 @@ $(document).ready(function () {
 
     // favBtn listener
     $("#favBtn").on("click", function (event) {
-        event.preventDefault();
+        // event.preventDefault();
         var addFav = $("#addItem").val().trim();
         if (addFav !== '') {
             database.ref("/users").child(user_UID).child("favorites").push({ favorite: addFav });
