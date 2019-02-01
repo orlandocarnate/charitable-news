@@ -5,15 +5,14 @@
     <title>
         Project 1
     </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-<!-- Link to Moment.js should go here -->
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <link href='assets/css/style.css' rel='stylesheet'>
 
 </head>
@@ -65,17 +64,17 @@
                         Charity
                 </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" id="animals" value="1">Animals</a></li>
-                        <li><a class="dropdown-item" id="artsAndculture" value="2">Arts, Culture, Humanities</a></li>
-                        <li><a class="dropdown-item" id="education" value="3">Education</a></li>
-                        <li><a class="dropdown-item" id="environment" value="4">Environment</a></li>
-                        <li><a class="dropdown-item" id="health" value="5">Health</a></li>
-                        <li><a class="dropdown-item" id="humanServices" value="6">Human Services</a></li>
-                        <li><a class="dropdown-item" id="international" value="7">International</a></li>
-                        <li><a class="dropdown-item" id="humanAndCivil" value="8">Human and Civil Rights</a></li>
-                        <li><a class="dropdown-item" id="religion" value="9">Religion</a></li>
-                        <li><a class="dropdown-item" id="communityDev" value="10">Community Development</a></li>
-                        <li><a class="dropdown-item" id="ResearchPolicy" value="11">Research and Public Policy</a></li>
+                        <li><a class="Charity-dropdown-item" id="animals" value="1">Animals</a></li>
+                        <li><a class="Charity-dropdown-item" id="artsAndculture" value="2">Arts, Culture, Humanities</a></li>
+                        <li><a class="Charity-dropdown-item" id="education" value="3">Education</a></li>
+                        <li><a class="Charity-dropdown-item" id="environment" value="4">Environment</a></li>
+                        <li><a class="Charity-dropdown-item" id="health" value="5">Health</a></li>
+                        <li><a class="Charity-dropdown-item" id="humanServices" value="6">Human Services</a></li>
+                        <li><a class="Charity-dropdown-item" id="international" value="7">International</a></li>
+                        <li><a class="Charity-dropdown-item" id="humanAndCivil" value="8">Human and Civil Rights</a></li>
+                        <li><a class="Charity-dropdown-item" id="religion" value="9">Religion</a></li>
+                        <li><a class="Charity-dropdown-item" id="communityDev" value="10">Community Development</a></li>
+                        <li><a class="Charity-dropdown-item" id="ResearchPolicy" value="11">Research and Public Policy</a></li>
                     </ul>
                 </li>
                
@@ -102,23 +101,27 @@
 
     </nav> 
 
-   
+
           
 
-    <div class="container" id="gridContainer">
-        <div class="row">
-            <div class="grid-item col-sm-4" id="article 1">1</div>
-            <div class="grid-item col-sm-4" id="article 2">2</div>
-            <div class="grid-item col-sm-4" id="article 3">3</div>
-            <div class="grid-item col-sm-4" id="article 4">4</div>
-            <div class="grid-item col-sm-4" id="article 5">5</div>
-            <div class="grid-item col-sm-4" id="article 6">6</div>
-        </div>
+    <div class="container-fluid">
+        <div class="row" id="gridContainer" >
+            <div class="col-sm-4" id="article 1">1</div>
+            <div class="col-sm-4" id="article 2">2</div>
+            <div class="col-sm-4" id="article 3">3</div>
+            <div class="col-sm-4" id="article 4">4</div>
+            <div class="col-sm-4" id="article 5">5</div>
+            <div class="col-sm-4" id="article 6">6</div>
         </div>
 
-        <div class="articleContainer" id="articleDisplay">
-            <div class="articleHolder" id="artHolder"></div>
-            <div class="charityHolder" id="charHolder"></div> <!-- use this to add charity info -->
+
+        <div class="container-fluid" id="articleDisplay">
+            <div class="row" id="articleContainer">
+            <div class="col-sm-12"></div>
+        </div>
+            <div class="row" id="charityHolder">
+            <div class="col-sm-6"></div> <!-- use this to add charity info -->
+        </div>
                 <button class="btn my-2 my-sm-0" type="submit" id="returnBtn">Return</button>
         </div>
 
