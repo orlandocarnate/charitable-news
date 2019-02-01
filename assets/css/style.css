@@ -81,13 +81,13 @@ a{
 
 .container-fluid {
     display: grid; 
-    grid-template-columns: auto auto auto;
+    /* grid-template-columns: auto auto auto; */
     padding: 10px;
     
  
 }
 
-.grid-item {
+.col-sm-3 {
 background-color: hsla(0,0%,100%,.3);
 opacity: 0.8;
 padding: 20px;
