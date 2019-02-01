@@ -37,7 +37,7 @@ var newsFinder = {
         console.log("news articles 1: ", response.articles[0].title);
         console.log("news object: ", response);
         for (i = 0; i < response.articles.length; i++) {
-            $card = $("<div class='grid-item' data-article='" + i + "'>");
+            $card = $("<div class='grid-item news-card' data-article='" + i + "'>");
             var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")"; 
             //moment(response[i].applicationstartdate, moment.ISO_8601).format("dddd, MMMM Do YYYY");
@@ -66,7 +66,7 @@ var newsFinder = {
         console.log("content: ", article.content);
         console.log("source: ", article.source.name);
 
-        var $article = $("<div class='grid-item card newscard' data-article='" + i + "'>");
+        var $article = $("<div class='grid-item card article-card' data-article='" + i + "'>");
         var $articleIMG = $("<img class='article-img-top'>").attr({ "src": article.urlToImage, "style": "text-align: center" });
         var $articleBody = $("<div class='card-body'>");
         var $articleTitle = $("<div class='card-title'>").html(article.title);
@@ -178,7 +178,7 @@ $("#searchBtn").on("click", function (event) {
 });
 
 // TODO: Listener for Single charity and article
-$(document).on("click", ".grid-item", function (event) {
+$(document).on("click", ".news-card", function (event) {
     event.preventDefault();
     var articleNum = $(this).attr("data-article");
     console.log(articleNum);
