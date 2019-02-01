@@ -12,12 +12,22 @@ var newsFinder = {
     search: function (query) {
         searchQuery = query;
         // ------- NEWS API ---------
-        var newsURL = 'https://newsapi.org/v2/everything?';
-        newsURL += 'q=' + query;
-        newsURL += '&ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
+        var newsURL = 'https://newsapi.org/v2/everything?'; // everything
+        // var newsURL = 'https://newsapi.org/v2/top-headlines?'; // TOP HEADLINES
+        newsURL += 'ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
+
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
         newsURL += '&language=en';
+
+        // Everything queries
+        newsURL += '&q=' + query;
+
+        // Top Headline Queries:
+        // newsURL += '&country=us';
+        // newsURL += '&category=' + query;
+
+
         // news AJAX call
         $.ajax({
             url: newsURL,
