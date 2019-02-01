@@ -17,6 +17,7 @@ var newsFinder = {
         newsURL += '&apiKey=e624c791383a46cabe1b19e39ba150f4';
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
+        newsURL += '&language=en';
         // news AJAX call
         $.ajax({
             url: newsURL,
@@ -110,16 +111,20 @@ var charityNavigator = {
 
         // create cards using for loop
         for (var i = 0; i < items.length; i++) {
-            var $charities = $("<div class='col-sm-6 news-card' data-charity='" + i + "'>");
+            var $charities = $("<div class='col-sm-6 charity-card' data-charity='" + i + "'>");
             var $charitiesBody = $("<div class='card-body'>");
             var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
-            var $charitiesAddress = $("<div class='card-content'>").text(items[i].mailingAddress.streetAddress1 + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince);
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL });
+                var charityURL = items[i].charityNavigatorURL;
             } else {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL });
+                var charityURL = items[i].websiteURL;
             }
+            var $charitiesAddress = $("<div class='card-content'>").html(items[i].mailingAddress.streetAddress1 
+                + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince
+                + "<br />" + charityURL);
             $charities.append($charitiesURL.append($charitiesBody.append($charitiesName, $charitiesAddress)));
             $charHolder.append($charities);
         }
@@ -134,7 +139,7 @@ var charityNavigator = {
         requestURL += "&app_key=" + key;
         requestURL += "&pageSize=6";
         requestURL += "&rated=true";
-        if (parseInt(query)) {
+        if (parseInt(id)) {
             console.log("Is Integer");
             requestURL += "&categoryID=" + id;
         } else {
@@ -151,6 +156,8 @@ var charityNavigator = {
             charityNavigator.charitiesMainGenerator(response);
         });
     },
+
+    // card generator when Charities dropdown is used.
     charitiesMainGenerator: function (items) {
 
         // clear results section
@@ -166,9 +173,11 @@ var charityNavigator = {
             // var $mission = $("<div class='source'>").text(response.articles[i].source.name);
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
-                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL, "text": "Website" });
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL});
+                $charitiesURL.text(items[i].charityNavigatorURL);
             } else {
-                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL, "text": "Website"  });
+                var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].websiteURL});
+                $charitiesURL.text(items[i].websiteURL);
             }
             $card.append($charitiesBody.append($charitiesName, $mission, $charitiesAddress, $charitiesURL));
             $("#gridContainer").append($card);

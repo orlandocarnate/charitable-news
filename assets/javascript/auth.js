@@ -58,10 +58,11 @@ $(document).ready(function () {
             var favs = userSnapshot.child(user_UID).child("favorites").val();
             console.log("fav len", Object.keys(favs));
             // https://stackoverflow.com/questions/684672/how-do-i-loop-through-or-enumerate-a-javascript-object
+            $("#fav-items").empty();
             Object.keys(favs).forEach(function(key) {
                 console.log("favorite:", favs[key].favorite);
                 var $fav = $("<button class='btn savedFavBtn'><a class='fav-dropdown-item' id='" + favs[key].favorite + "'>" + favs[key].favorite + "</a></button>");
-                $(".sidebar").append($fav);
+                $("#fav-items").append($fav);
             })
         };
 
