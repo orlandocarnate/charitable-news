@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Project 1
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <link href='assets/css/style.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <section class="sect-banner">
+            <div class="banner-bg"></div>
+
+
+            <nav class="navbar navbar-expand-sm" id="navbar">
+                <a class="navbar-brand" href="#">App Name</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                      </button>
+
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="navbar-nav mr-auto">
+                        <!-- <li class="nav-item active"> -->
+                            <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+                        <!-- </li> -->
+<!--                     
+                            </div> -->
+                        <li class="nav-item dropdown" id="newsDropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                News
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <li><a class="dropdown-item" id='sports' value="1">Sports</a></li>
+                                    <li><a class="dropdown-item" id='business' value="2">Business</a></li>
+                                    <li><a class="dropdown-item" id='Technology' value="3">Technology</a></li>
+                                    <li><a class="dropdown-item" id='environment' value="4">Environment</a></li>
+                                    <li><a class="dropdown-item" id='health' value="5">Health</a></li>
+                                    <li><a class="dropdown-item" id='"human services"' value="6">Human Services</a></li>
+                                    <li><a class="dropdown-item" id='international' value="7">International</a></li>
+                                    <li><a class="dropdown-item" id='"human rights" OR "Civil Rights"' value="8">Human and Civil Rights</a></li>
+                                    <li><a class="dropdown-item" id='religion' value="9">Religion</a></li>
+                                    <li><a class="dropdown-item" id='"Community Development"' value="10">Community Development</a></li>
+                                    <li><a class="dropdown-item" id='"Research Policy" OR "public policy"' value="11">Research and Public Policy</a></li>
+                                    <li><a class="dropdown-item" id="arts OR culture OR humanities" value="2">Arts, Culture, Humanities</a></li>
+                                </ul>
+
+                        </li>
+
+                        <li class="nav-item dropdown" id="charityDropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Charity
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="Charity-dropdown-item" id="animals" value="1">Animals</a></li>
+                                <li><a class="Charity-dropdown-item" id="artsAndculture" value="2">Arts, Culture,
+                                        Humanities</a></li>
+                                <li><a class="Charity-dropdown-item" id="education" value="3">Education</a></li>
+                                <li><a class="Charity-dropdown-item" id="environment" value="4">Environment</a></li>
+                                <li><a class="Charity-dropdown-item" id="health" value="5">Health</a></li>
+                                <li><a class="Charity-dropdown-item" id="humanServices" value="6">Human Services</a></li>
+                                <li><a class="Charity-dropdown-item" id="international" value="7">International</a></li>
+                                <li><a class="Charity-dropdown-item" id="humanAndCivil" value="8">Human and Civil
+                                        Rights</a></li>
+                                <li><a class="Charity-dropdown-item" id="religion" value="9">Religion</a></li>
+                                <li><a class="Charity-dropdown-item" id="communityDev" value="10">Community Development</a></li>
+                                <li><a class="Charity-dropdown-item" id="ResearchPolicy" value="11">Research and Public
+                                        Policy</a></li>
+                            </ul>
+                        </li>
+
+
+                        <!-- <li class="nav-item dropdown" id="favoritesDropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Favorites
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <form class="form-inline my-2 my-lg-0">
+                                        <input class="form-control mr-sm-2" type="add" placeholder="Add" aria-label="Add"
+                                            id="addItem">
+                                        <button class="btn my-2 my-sm-0" type="submit" id="favBtn">Add to Favorites</button>
+                                    </form>
+                                </li>
+                            </ul>
+
+                        </li> -->
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchItem">
+                        <button class="btn my-2 my-sm-0" type="submit" id="searchBtn">Search</button>
+                    </form>
+                </div>
+
+            </nav>
+
+
+            
+            <aside>
+                    <div class= "sidebar">
+                            <input class="form-control mr-sm-2" type="add" placeholder="Add to favorites" aria-label="Add to Favorites"
+                            id="addItem">
+                        <button class="btn my-2 my-sm-0" type="submit" id="favBtn">Add</button>
+                        <div id="fav-items"></div>
+    
+                    </div>
+    
+                </aside>
+
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-end" id="gridContainer">
+                    <div class="col-sm-3" id="article 1">1</div>
+                    <div class="col-sm-3" id="article 2">2</div>
+                    <div class="col-sm-3" id="article 3">3</div>
+                    <div class="col-sm-3" id="article 4">4</div>
+                    <div class="col-sm-3" id="article 5">5</div>
+                    <div class="col-sm-3" id="article 6">6</div>
+                </div> 
+
+                
+
+                <div class="container-fluid" id="articleDisplay">
+                    <div class="row" id="articleContainer">
+                        <div class="col-sm-12"></div>
+                    </div>
+                    <div class="row" id="charityHolder">
+                        <div class="col-sm-6"></div>
+                    </div> <!-- use this to add charity info -->
+                    <button class="btn my-2 my-sm-0" type="submit" id="returnBtn">Return</button>
+                    
+
+                </div>
+
+
+                <script src="assets/javascript/charities.js"></script>
+                <script src="assets/javascript/auth.js"></script>
+                <script src="assets/javascript/slideshow.js"></script>
+
+</body>
+
+</html>
