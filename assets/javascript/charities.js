@@ -326,7 +326,7 @@ function clearElements() {
 };
 
 function clearFav() {
-    $("#sidebar-container").hide();
+    $("#sidebar").hide();
     $("#previousBtn").hide();
     $("#nextBtn").hide();
     $(".news-card").hide();
@@ -335,7 +335,7 @@ function clearFav() {
 function showFav() {
     $("#previousBtn").show();
     $("#nextBtn").show();
-    $("#sidebar-container").show();
+    $("#sidebar").show();
     $(".news-card").show();
 };
 
