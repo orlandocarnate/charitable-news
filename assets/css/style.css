@@ -31,6 +31,12 @@
     }
 }
 
+@media (max-width: 400px){
+    #charityHolder{
+        background-color:blue;
+    } 
+}
+
 
 
 
@@ -210,7 +216,7 @@ overflow: auto;
     
     }
     
-    .grid-item.article-img-top {
+    .article-img-top {
         width: 250px;
         height: 250px;
         object-fit: cover;
@@ -246,7 +252,7 @@ overflow: auto;
         color: rgb(44, 44, 44);
         text-decoration: none;
     }
-}
+
 
 
 
