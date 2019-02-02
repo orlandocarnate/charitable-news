@@ -1,4 +1,4 @@
-# [News & Charities app *name in progress*](http://charitable-news.com/)
+# [Charitable-News.com - A News & Charities app](http://charitable-news.com/)
 
 ## Project Description
 An app that allows users to read news pertinent to the United States while being informed about related events/charity organizations. The objective is to build communities of socially responsible citizens who do not just passively consume news- but take actionable steps towards making a better country. 
@@ -9,10 +9,12 @@ An app that allows users to read news pertinent to the United States while being
     * Github Repository: https://github.com/awilmoth/project1
 
     Resources
+    * [Bootstrap Framework](https://getbootstrap.com/docs/4.2/getting-started/introduction/) for Frontend Framework
     * [Firebase Realtime Database](https://firebase.google.com/docs/database/)
     * [Firebase Anonymous Authentication](https://firebase.google.com/docs/auth/web/anonymous-auth)
     * [AWS Hosting a Static Website on Amazon S3 - Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
     * [AWS CodePipeline | Continuous Integration & Continuous Delivery](https://aws.amazon.com/codepipeline/)
+    * [Moment.JS](https://momentjs.com/docs/) for formatting ISO_8601 time formats to MM/DD/YYYY
 
 ## API's used
 
