@@ -1,7 +1,7 @@
 # [News & Charities app *name in progress*](http://charitable-news.com/)
 
 ## Project Description
-An app that allows Chicagoans to read local news pertinent to the city while being informed about related events/charity organizations. The objective is to build communities of socially responsible citizens who do not just passively consume news- but take actionable steps towards making Chicago a better city. 
+An app that allows users to read news pertinent to the United States while being informed about related events/charity organizations. The objective is to build communities of socially responsible citizens who do not just passively consume news- but take actionable steps towards making a better country. 
 
 * Links:
     * Deployed Website: http://charitable-news.com/
