@@ -7,6 +7,7 @@ var searchQuery;
 var selectedID;
 var newsPage = 1;
 var charPage = 1;
+var isNews = true; // for the prev and next buttons - if true use for News. If False use for Charities
 
 $("#articleDisplay").hide();
 // news object & API
@@ -97,14 +98,12 @@ var newsFinder = {
         // call the charities generator method
         charityNavigator.search(searchQuery);  // searchQuery is a Global Var
     },
-
 };
 
 // charity navigator object API https://charity.3scale.net/
 var charityNavigator = {
 
     search: function (query) {
-
         var appID = "4d" + "d27455";
         var key = 'd86a03' + '7d4ea3f2785ab' + 'ba1684a1e4bfd'; // key
         var requestURL = "https://api.data.charitynavigator.org/v2/Organizations";
@@ -123,13 +122,11 @@ var charityNavigator = {
             console.log("Charities Search: ", response);
             charityNavigator.charitiesGenerator(response);
         });
-
     },
 
     charitiesGenerator: function (items) {
         $charHolder = $("#charityHolder");
         $charHolder.empty();
-
         // create cards using for loop
         for (var i = 0; i < items.length; i++) {
             var $charities = $("<div class='col-sm-6 charity-card' data-charity='" + i + "'>");
@@ -149,7 +146,6 @@ var charityNavigator = {
             $charities.append($charitiesURL.append($charitiesBody.append($charitiesName, $charitiesAddress)));
             $charHolder.append($charities);
         }
-
     },
 
     searchByCategory: function (id) {
@@ -159,16 +155,10 @@ var charityNavigator = {
         requestURL += "?app_id=" + appID;
         requestURL += "&app_key=" + key;
         requestURL += "&pageSize=6";
+        requestURL += "&pageNum=" + charPage;
         requestURL += "&rated=true";
+        requestURL += "&categoryID=" + id;
         console.log('charURL CAT: ', requestURL);
-        if (parseInt(id)) {
-            console.log("Is Integer");
-            requestURL += "&categoryID=" + id;
-        } else {
-            console.log("Is String");
-            requestURL += "&search=" + query;
-        }
-
         // charity AJAX call
         $.ajax({
             url: requestURL,
@@ -181,7 +171,6 @@ var charityNavigator = {
 
     // card generator when Charities dropdown is used.
     charitiesMainGenerator: function (items) {
-
         // clear results section
         $("#gridContainer").empty();
         // var $table = $("<table class='news'>");
@@ -204,9 +193,7 @@ var charityNavigator = {
             $card.append($charitiesBody.append($charitiesName, $mission, $charitiesAddress, $charitiesURL));
             $("#gridContainer").append($card);
         }
-
     },
-
 };
 
 // --- EVENT LISTENERS ----
@@ -214,31 +201,31 @@ var charityNavigator = {
 // News Dropdown listener
 $(".dropdown-item").on("click", function (event) {
     event.preventDefault();
+    newsPage = 1;
+    isNews = true;
     // get value of 'this' selected dropdown
     selectedID = $(this).attr("id");
     catID = $(this).attr("value");
     console.log("ID, CatID: ", selectedID, catID);
     newsFinder.search(selectedID); // Everything Search
     // newsFinder.searchHeadlines(selectedID); // Headlines by Category search
-    $("#artHolder").empty();
-    $("#charHolder").empty();
-    $("#articleDisplay").hide();
-    $(".news-card").show();
+    clearElements();
+    showFav();
     $("#addItem").val(selectedID); // send search item to favorites input text box.
 });
 
 // Charity Dropdown listener
 $(".Charity-dropdown-item").on("click", function (event) {
     event.preventDefault();
-    // get value of 'this' selected dropdown
-    selectedID = $(this).attr("id");
+    isNews = false; // for the prev and next buttons
+    charPage = 1;
+    selectedID = $(this).attr("id"); // get value of 'this' selected dropdown
     catID = $(this).attr("value");
     console.log("CatID: ", catID);
+    clearElements();
+    showFav();
     charityNavigator.searchByCategory(catID);
-    $("#artHolder").empty();
-    $("#charHolder").empty();
-    $("#articleDisplay").hide();
-    $(".news-card").show();
+
     $("#addItem").val(selectedID); // send search item to favorites input text box.
 
 });
@@ -252,15 +239,18 @@ $("#searchBtn").on("click", function (event) {
         newsFinder.search(query);
         charityNavigator.search(query);
         $("#addItem").val(query);
+        showFav();
     }
+    
 });
 
 // News Card Listener
 $(document).on("click", ".news-card", function (event) {
     event.preventDefault();
-    var articleNum = $(this).attr("data-article");
+    var articleNum = $(this).attr("data-article"); i
     console.log(articleNum);
-    $(".news-card").hide();
+
+    clearFav();
     newsFinder.articleGenerator(articleNum);
     // charityNavigator.charitiesGenerator(articleNum);
 
@@ -269,10 +259,12 @@ $(document).on("click", ".news-card", function (event) {
 // RETURN BUTTON listener
 $(document).on("click", "#returnBtn", function (event) {
     event.preventDefault();
-    $("#articleContainer").empty();
-    $("#charityHolder").empty();
-    $("#articleDisplay").hide();
+    showFav();
     $(".news-card").show();
+    $("#artHolder").empty();
+    $("#charHolder").empty();
+    $("#articleDisplay").hide();
+
 })
 
 // Saved Favorites Button Listener
@@ -282,10 +274,7 @@ $(document).on("click", ".savedFavBtn", function (event) {
     console.log("data-item: ", query);
     newsFinder.search(query);
     charityNavigator.search(query);
-    $("#artHolder").empty();
-    $("#charHolder").empty();
-    $("#articleDisplay").hide();
-    $(".news-card").show();
+    clearElements();
 });
 
 // turn off ALL Form Submit events.
@@ -296,26 +285,57 @@ $("form").submit(function (event) {
 // PREV and NEXT listeners
 $("#previousBtn").on("click", function (event) {
     event.preventDefault();
-    if (newsPage > 1) {
-        newsPage--;
-        $("#artHolder").empty();
-        $("#charHolder").empty();
-        $("#gridContainer").empty();
-        $("#articleDisplay").hide();
-        $(".news-card").show();
-        newsFinder.search(selectedID);
-
+    if (isNews) {
+        if (newsPage > 1) {
+            newsPage--;
+            clearElements();
+            newsFinder.search(selectedID);
+        }
+    } else {
+        if (charPage > 1) {
+            charPage--;
+            clearElements();
+            charityNavigator.searchByCategory(catID);
+        }
     }
+
+
 });
 
 $("#nextBtn").on("click", function (event) {
     event.preventDefault();
-    newsPage++;
+    clearElements();
+    if (isNews) {
+        newsPage++;
+        newsFinder.search(selectedID);
+    } else {
+        charPage++;
+        charityNavigator.searchByCategory(catID);
+    }
+
+
+
+});
+
+function clearElements() {
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#gridContainer").empty();
     $("#articleDisplay").hide();
+
+};
+
+function clearFav() {
+    $("#sidebar").hide();
+    $("#previousBtn").hide();
+    $("#nextBtn").hide();
+    $(".news-card").hide();
+};
+
+function showFav() {
+    $("#previousBtn").show();
+    $("#nextBtn").show();
+    $("#sidebar").show();
     $(".news-card").show();
-    newsFinder.search(selectedID);
-});
+};
 
