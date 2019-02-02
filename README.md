@@ -8,6 +8,12 @@ An app that allows Chicagoans to read local news pertinent to the city while bei
     * Github Pages: https://awilmoth.github.io/project1/
     * Github Repository: https://github.com/awilmoth/project1
 
+    Resources
+    * [Firebase Realtime Database](https://firebase.google.com/docs/database/)
+    * [Firebase Anonymous Authentication](https://firebase.google.com/docs/auth/web/anonymous-auth)
+    * [AWS Hosting a Static Website on Amazon S3 - Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+    * [AWS CodePipeline | Continuous Integration & Continuous Delivery](https://aws.amazon.com/codepipeline/)
+
 ## API's used
 
 ### [News API](https://newsapi.org/)
