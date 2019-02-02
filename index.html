@@ -41,34 +41,16 @@
 
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="navbar-nav mr-auto">
-                        <!-- <li class="nav-item active"> -->
-                            <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
-                        <!-- </li> -->
-<!--                     
-                            </div> -->
+                       
                         <li class="nav-item dropdown" id="newsDropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 News
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-<!-- <<<<<<< HEAD
-                                    <li><a class="dropdown-item" id='sports' value="1">Sports</a></li>
-                                    <li><a class="dropdown-item" id='business' value="2">Business</a></li>
-                                    <li><a class="dropdown-item" id='Technology' value="3">Technology</a></li>
-                                    <li><a class="dropdown-item" id='environment' value="4">Environment</a></li>
-                                    <li><a class="dropdown-item" id='health' value="5">Health</a></li>
-                                    <li><a class="dropdown-item" id='"human services"' value="6">Human Services</a></li>
-                                    <li><a class="dropdown-item" id='international' value="7">International</a></li>
-                                    <li><a class="dropdown-item" id='"human rights" OR "Civil Rights"' value="8">Human and Civil Rights</a></li>
-                                    <li><a class="dropdown-item" id='religion' value="9">Religion</a></li>
-                                    <li><a class="dropdown-item" id='"Community Development"' value="10">Community Development</a></li>
-                                    <li><a class="dropdown-item" id='"Research Policy" OR "public policy"' value="11">Research and Public Policy</a></li>
-                                    <li><a class="dropdown-item" id="arts OR culture OR humanities" value="2">Arts, Culture, Humanities</a></li>
-                                </ul>
-<!-- <<<<<<< HEAD
+
                         
-======= -->
+
                                 <li><a class="dropdown-item" id="sports" value="1">Sports</a></li>
                                 <li><a class="dropdown-item" id="business" value="2">Business</a></li>
                                 <li><a class="dropdown-item" id="Technology" value="3">Technology</a></li>
@@ -82,10 +64,7 @@
                                 <li><a class="dropdown-item" id="'Research Policy' OR 'public policy'" value="11">Research and Public Policy</a></li>
                                 <li><a class="dropdown-item" id="arts OR culture OR humanities" value="2">Arts, Culture, Humanities</a></li>
                             </ul>
-<!-- >>>>>>> 39fb28d86ed320769f3f7bd410a9bff8aa3c4114
-=======
 
->>>>>>> dd868797b05cd632ea4e4a05c96a425a79b191d1 -->
                         </li>
 
                         <li class="nav-item dropdown" id="charityDropdown">
@@ -112,22 +91,6 @@
                         </li>
 
 
-                        <!-- <li class="nav-item dropdown" id="favoritesDropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Favorites
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <form class="form-inline my-2 my-lg-0">
-                                        <input class="form-control mr-sm-2" type="add" placeholder="Add" aria-label="Add"
-                                            id="addItem">
-                                        <button class="btn my-2 my-sm-0" type="submit" id="favBtn">Add to Favorites</button>
-                                    </form>
-                                </li>
-                            </ul>
-
-                        </li> -->
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchItem">
@@ -137,22 +100,57 @@
 
             </nav>
 
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="container">
+                            <div class="row" id ="sidebar">
+                                    <input class="form-control col-sm-12" type="add" placeholder="Add to favorites" aria-label="Add to Favorites"
+                                    id="addItem">
+                                    <button class="btn my-2 col-sm-12" type="submit" id="favBtn">Add</button>
+                                    <div class="col-sm-12" id="fav-items"></div>
 
-            <div class="wrapper">
-            <!-- <aside> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10" id ="maincontent">
+                            <!-- <div class="container-fluid"> -->
+                                    <div class="row d-flex justify-content-center" id="gridContainer">
+                                            <div class="col-sm-3" id="article 1">1</div>
+                                            <div class="col-sm-3" id="article 2">2</div>
+                                            <div class="col-sm-3" id="article 3">3</div>
+                                            <div class="col-sm-3" id="article 4">4</div>
+                                            <div class="col-sm-3" id="article 5">5</div>
+                                            <div class="col-sm-3" id="article 6">6</div>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                        <button class="btn my-2 col-sm-2 m-1" type="submit" id="previousBtn">Previous</button>
+                                        <button class="btn my-2 col-sm-2 m-1" type="submit" id="nextBtn">Next</button>
+                                        
+                    </div>
+                    
+                    </div>
+
+                </div>
                 
+            </div>
+
+            <!-- <div class="wrapper">
+             <aside> -->
+<!--                 
                     <div class= "row d-flex flex-column" id="sidebar">
                             <input class="form-control col-sm-11" type="add" placeholder="Add to favorites" aria-label="Add to Favorites"
                             id="addItem">
                         <button class="btn my-2 col-sm-4" type="submit" id="favBtn">Add</button>
                         <div class="col-sm-12" id="fav-items"></div>
     
-                    </div>
+                    </div> -->
               
     
                 <!-- </aside> -->
 
-            <div class="container-fluid">
+            <!-- <div class="container-fluid">
                 <div class="row d-inline-flex justify-content-center" id="gridContainer">
                     <div class="col-sm-3" id="article 1">1</div>
                     <div class="col-sm-3" id="article 2">2</div>
@@ -163,7 +161,7 @@
                 </div> 
 
             </div>
-        </div>
+        </div> -->
 
                 
 
@@ -187,3 +185,17 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
