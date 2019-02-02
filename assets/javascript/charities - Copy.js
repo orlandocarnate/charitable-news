@@ -40,7 +40,7 @@ var newsFinder = {
         searchQuery = query;
         // ------- NEWS API ---------
         var newsURL = 'https://newsapi.org/v2/top-headlines?'; // TOP HEADLINES
-        newsURL += 'ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
+        newsURL += 'apiKey=e624c791383a46cabe1b19e39ba150f4';
         newsURL += '&pageSize=6';
         newsURL += '&sortBy=publishedAt';
         newsURL += '&language=en';
@@ -66,6 +66,8 @@ var newsFinder = {
         $("#gridContainer").empty();
         for (i = 0; i < response.articles.length; i++) {
             $card = $("<div class='col-sm-3 news-card' data-article='" + i + "'>");
+            // newspaper image from http://www.pngall.com/newspaper-png
+            if ()
             var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")";
             var $body = $("<div class='card-body'>");
@@ -132,7 +134,7 @@ var charityNavigator = {
         for (var i = 0; i < items.length; i++) {
             var $charities = $("<div class='col-sm-6 charity-card' data-charity='" + i + "'>");
             var $charitiesBody = $("<div class='card-body'>");
-            var $charitiesName = $("<div class='card-title'>").html(items[i].charityName + "<br /><img src='" + items[i].currentRating.ratingImage.large + "'>");
+            var $charitiesName = $("<div class='card-title'>").html (items[i].charityName + "<br /><img src='" + items[i].currentRating.ratingImage.large + "'>");
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL });
@@ -246,7 +248,7 @@ $("#searchBtn").on("click", function (event) {
         $("#charHolder").empty();
         $("#articleDisplay").hide();
     }
-
+    
 });
 
 // News Card Listener
