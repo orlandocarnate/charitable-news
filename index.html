@@ -22,12 +22,12 @@
 
 <body>
     <div class="container-fluid">
-        <section class="sect-banner">
-            <div class="banner-bg"></div>
+        <!-- <section class="sect-banner">
+            <div class="banner-bg"></div> -->
 
 
             <nav class="navbar navbar-expand-sm" id="navbar">
-                <a class="navbar-brand" href="#">App Name</a>
+                <a class="navbar-brand" href="#">Charitable News</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 
@@ -67,12 +67,15 @@
 
                         </li>
 
+                    
+
                         <li class="nav-item dropdown" id="charityDropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 Charity
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                                 <li><a class="Charity-dropdown-item" id="animals" value="1">Animals</a></li>
                                 <li><a class="Charity-dropdown-item" id="artsAndculture" value="2">Arts, Culture,
                                         Humanities</a></li>
@@ -93,26 +96,29 @@
 
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchItem">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchItem" required>
                         <button class="btn my-2 my-sm-0" type="submit" id="searchBtn">Search</button>
                     </form>
                 </div>
 
             </nav>
 
-            <div class="container">
-                <div class="row">
+            <div class="container-fluid">
+                <div class="row d-inline-flex">
                     <div class="col-sm-2">
                         <div class="container">
-                            <div class="row" id ="sidebar">
+                                <form class="form-inline my-2 my-lg-0">
+                            <div class="row d-flex flex-column" id ="sidebar">
                                     <input class="form-control col-sm-12" type="add" placeholder="Add to favorites" aria-label="Add to Favorites"
-                                    id="addItem">
+                                    id="addItem" required>
                                     <button class="btn my-2 col-sm-12" type="submit" id="favBtn">Add</button>
                                     <div class="col-sm-12" id="fav-items"></div>
 
                             </div>
+                            </form>
                         </div>
                     </div>
+                    
                     <div class="col-sm-10" id ="maincontent">
                             <!-- <div class="container-fluid"> -->
                                     <div class="row d-flex justify-content-center" id="gridContainer">
