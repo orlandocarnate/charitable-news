@@ -45,12 +45,15 @@
     
 }
 
-.dropdown-menu > li > a:hover{
+.dropdown-menu > li > .Charity-dropdown-item > a:hover{
     background-color: rgba(143, 137, 137, 0.795); 
-    z-index: 100;
-
+    z-index: 100;  
 }
 
+.dropdown-menu > li> a:hover{
+        background-color: rgba(143, 137, 137, 0.795); 
+        z-index: 100;
+}
 .nav-item > a:hover{
 color: rgba(143, 137, 137, 0.795); 
 }
@@ -89,7 +92,7 @@ a{
    /* background-color: rgba(12, 11, 11, 0.548); */
    background-color: black;
    color: white;
-   /* position: fixed; */
+   
    
 
 }
@@ -122,27 +125,36 @@ a{
     background-color:  rgba(12, 11, 11, 0.548);
     margin-left: 0;
     
+    
 
 }
 
 #fav-items{
     border-top-style: solid;
+    overflow: auto;
 } 
 
 
 .col-sm-3{
 background-color: rgb(44, 44, 44);
 opacity: 0.7;
-padding: 10px;
+padding: 5px;
 text-align: center;
 margin: 10px;
 font-size: 15px;
-margin-top: 20px;
 z-index: 80;
 color:white;
 overflow: auto;
 
+
+
     
+}
+
+.container{
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
 }
 
 .container-fluid{
@@ -155,10 +167,19 @@ overflow: auto;
 
 #maincontent { 
     display: grid;
+    padding: 0;
    
    
  }
 
+ .col-sm-2{
+     padding: 0;
+ }
+
+ .row{
+     
+     padding:5px;
+ }
 
  #previousBtn{
     background-color: black;
