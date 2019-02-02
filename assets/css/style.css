@@ -238,6 +238,17 @@ overflow: auto;
     }
 
 
+#charityHolder{
+    background-color: rgb(97, 94, 94);
+}
+
+.col-sm-6 > a:hover{
+        color: rgb(44, 44, 44);
+        text-decoration: none;
+    }
+}
+
+
 
 
    
