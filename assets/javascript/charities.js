@@ -4,6 +4,9 @@ var catID;
 var newsData;
 var charitySearch;
 var searchQuery;
+var selectedID;
+var newsPage = 1;
+var charPage = 1;
 
 $("#articleDisplay").hide();
 // news object & API
@@ -15,11 +18,12 @@ var newsFinder = {
         var newsURL = 'https://newsapi.org/v2/everything?'; // everything
         newsURL += 'ap' + 'iK' + 'ey=e624' + 'c791383a' + '46cabe1b1' + '9e39ba150f4';
         newsURL += '&pageSize=6';
+        newsURL += '&page=' + newsPage;
         newsURL += '&sortBy=publishedAt';
         newsURL += '&language=en';
         // Everything queries
         newsURL += '&q=' + query;
-
+        console.log('newsURL: ', newsURL);
         // news AJAX call
         $.ajax({
             url: newsURL,
@@ -59,10 +63,8 @@ var newsFinder = {
 
         // clear results section
         $("#gridContainer").empty();
-        // var $table = $("<table class='news'>");
         for (i = 0; i < response.articles.length; i++) {
             $card = $("<div class='col-sm-3 news-card' data-article='" + i + "'>");
-            // $cardWrapper = $("<div class='wrapper'>");
             var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var date = " (" + moment(response.articles[i].publishedAt, moment.ISO_8601).format("MM/DD/YY") + ")";
             var $body = $("<div class='card-body'>");
@@ -70,8 +72,6 @@ var newsFinder = {
             var $descrip = $("<div class='card-text'>").html(response.articles[i].description);
             var $source = $("<div class='source'>").text(response.articles[i].source.name);
             $card.append($img, $body.append($title, $descrip, $source));
-            // $cardWrapper.append($img, $body.append($title, $descrip, $source));
-            // $card.append($cardWrapper);
             $("#gridContainer").append($card);
         }
     },
@@ -80,7 +80,7 @@ var newsFinder = {
         $("#articleDisplay").show();
         $("#articleContainer").empty();
         $(".news-card").hide();
-        // display single artile using item as an index to get info from newsData
+        // display single article using item as an index to get info from newsData
         $articleContainer = $("#articleContainer");
         var article = newsData.articles[item];
         console.log(article.urlToImage);
@@ -95,7 +95,7 @@ var newsFinder = {
         $articleContainer.append($article);
 
         // call the charities generator method
-        charityNavigator.search(searchQuery);  // selectedID is a Global Var
+        charityNavigator.search(searchQuery);  // searchQuery is a Global Var
     },
 
 };
@@ -105,21 +105,16 @@ var charityNavigator = {
 
     search: function (query) {
 
-        var appID = "4dd27455";
-        var key = 'd86a037d4ea3f2785abba1684a1e4bfd'; // key
+        var appID = "4d" + "d27455";
+        var key = 'd86a03' + '7d4ea3f2785ab' + 'ba1684a1e4bfd'; // key
         var requestURL = "https://api.data.charitynavigator.org/v2/Organizations";
         requestURL += "?app_id=" + appID;
         requestURL += "&app_key=" + key;
         requestURL += "&pageSize=6";
+        requestURL += "&pageNum=" + charPage;
         requestURL += "&rated=true";
-        if (parseInt(query)) {
-            console.log("Is Integer");
-            requestURL += "&categoryID=" + id;
-        } else {
-            console.log("Is String");
-            requestURL += "&search=" + query;
-        }
-
+        requestURL += "&search=" + query;
+        console.log("Charity API URL: ", requestURL);
         // charity AJAX call
         $.ajax({
             url: requestURL,
@@ -165,6 +160,7 @@ var charityNavigator = {
         requestURL += "&app_key=" + key;
         requestURL += "&pageSize=6";
         requestURL += "&rated=true";
+        console.log('charURL CAT: ', requestURL);
         if (parseInt(id)) {
             console.log("Is Integer");
             requestURL += "&categoryID=" + id;
@@ -219,7 +215,7 @@ var charityNavigator = {
 $(".dropdown-item").on("click", function (event) {
     event.preventDefault();
     // get value of 'this' selected dropdown
-    var selectedID = $(this).attr("id");
+    selectedID = $(this).attr("id");
     catID = $(this).attr("value");
     console.log("ID, CatID: ", selectedID, catID);
     newsFinder.search(selectedID); // Everything Search
@@ -235,7 +231,7 @@ $(".dropdown-item").on("click", function (event) {
 $(".Charity-dropdown-item").on("click", function (event) {
     event.preventDefault();
     // get value of 'this' selected dropdown
-    var selectedID = $(this).attr("id");
+    selectedID = $(this).attr("id");
     catID = $(this).attr("value");
     console.log("CatID: ", catID);
     charityNavigator.searchByCategory(catID);
@@ -285,14 +281,41 @@ $(document).on("click", ".savedFavBtn", function (event) {
     var query = $(this).attr("data-item");
     console.log("data-item: ", query);
     newsFinder.search(query);
+    charityNavigator.search(query);
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
     $(".news-card").show();
-    // charityNavigator.search(query);
 });
 
 // turn off ALL Form Submit events.
-$("form").submit(function(event) {
+$("form").submit(function (event) {
     event.preventDefault();
 });
+
+// PREV and NEXT listeners
+$("#previousBtn").on("click", function (event) {
+    event.preventDefault();
+    if (newsPage > 1) {
+        newsPage--;
+        $("#artHolder").empty();
+        $("#charHolder").empty();
+        $("#gridContainer").empty();
+        $("#articleDisplay").hide();
+        $(".news-card").show();
+        newsFinder.search(selectedID);
+
+    }
+});
+
+$("#nextBtn").on("click", function (event) {
+    event.preventDefault();
+    newsPage++;
+    $("#artHolder").empty();
+    $("#charHolder").empty();
+    $("#gridContainer").empty();
+    $("#articleDisplay").hide();
+    $(".news-card").show();
+    newsFinder.search(selectedID);
+});
+
