@@ -45,9 +45,6 @@ $(document).ready(function () {
         console.log("CatID exists? ", userSnapshot.child(user_UID).child("query").exists());
         console.log("userID saved? ", userSnapshot.child(user_UID).exists());
         console.log("Favorites saved? ", userSnapshot.child(user_UID).child("favorites").val());
-        // if (userSnapshot.child(user_UID).exists()) {
-        // console.log("user ID: ", userSnapshot.child(user_UID));
-        // };
         if (userSnapshot.child(user_UID).child("lastsearch").exists()) {
             console.log("lastsearch: ", userSnapshot.child(user_UID).val().lastsearch);
             query = userSnapshot.child(user_UID).val().lastsearch;
@@ -65,7 +62,6 @@ $(document).ready(function () {
                 $("#fav-items").append($fav);
             })
         };
-
     });
 
     // Firebase connection status
@@ -75,10 +71,6 @@ $(document).ready(function () {
             connList.onDisconnect().remove(); // remove user from list when disconnected
         }
     });
-
-    // ------------ TODO ------------
-    // save user's preference
-    // set the user pref to Firebase
 
     // --- EVENT LISTENERS ----
 
@@ -93,7 +85,6 @@ $(document).ready(function () {
         if (selectedID !== '') {
             database.ref("/users").child(user_UID).update({ lastsearch: selectedID });
         }
-
     });
 
     // search button listener
@@ -102,21 +93,16 @@ $(document).ready(function () {
         var searchItem = $("#searchItem").val();
         if (searchItem !== '') {
             database.ref("/users").child(user_UID).update({ lastsearch: searchItem });
-
-
         }
     });
 
-    // favBtn listener
+    // favBtn listener - adds search string to Firebase
     $("#favBtn").on("click", function (event) {
         // event.preventDefault();
         var addFav = $("#addItem").val().trim();
         if (addFav !== '') {
             database.ref("/users").child(user_UID).child("favorites").push({ favorite: addFav });
-
         }
     })
-
-
 
 });
