@@ -112,6 +112,7 @@ var charityNavigator = {
         requestURL += "&pageSize=6";
         requestURL += "&pageNum=" + charPage;
         requestURL += "&rated=true";
+        // requestURL += "&sort=RATING:DESC";
         requestURL += "&search=" + query;
         console.log("Charity API URL: ", requestURL);
         // charity AJAX call
@@ -131,7 +132,7 @@ var charityNavigator = {
         for (var i = 0; i < items.length; i++) {
             var $charities = $("<div class='col-sm-6 charity-card' data-charity='" + i + "'>");
             var $charitiesBody = $("<div class='card-body'>");
-            var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
+            var $charitiesName = $("<div class='card-title'>").html (items[i].charityName + "<br /><img src='" + items[i].currentRating.ratingImage.large + "'>");
             // if there is no URL then use Charity Navigator URL
             if (items[i].websiteURL === null) {
                 var $charitiesURL = $("<a class='website' target='_blank'>").attr({ "href": items[i].charityNavigatorURL });
@@ -157,6 +158,7 @@ var charityNavigator = {
         requestURL += "&pageSize=6";
         requestURL += "&pageNum=" + charPage;
         requestURL += "&rated=true";
+        // requestURL += "&sort=RATING:DESC";
         requestURL += "&categoryID=" + id;
         console.log('charURL CAT: ', requestURL);
         // charity AJAX call
@@ -178,7 +180,7 @@ var charityNavigator = {
             $card = $("<div class='col-sm-3'>");
             // var $img = $("<img class='card-img-top center-block'>").attr({ "src": response.articles[i].urlToImage });
             var $charitiesBody = $("<div class='card-body'>");
-            var $charitiesName = $("<div class='card-title'>").text(items[i].charityName);
+            var $charitiesName = $("<div class='card-title'>").html(items[i].charityName + "<br /><img src='" + items[i].currentRating.ratingImage.large + "'>");
             var $mission = $("<div class='card-text'>").html(items[i].mission);
             var $charitiesAddress = $("<div class='card-content'>").text(items[i].mailingAddress.streetAddress1 + " " + items[i].mailingAddress.city + ", " + items[i].mailingAddress.stateOrProvince);
             // var $mission = $("<div class='source'>").text(response.articles[i].source.name);
@@ -264,7 +266,6 @@ $(document).on("click", "#returnBtn", function (event) {
     $("#artHolder").empty();
     $("#charHolder").empty();
     $("#articleDisplay").hide();
-
 })
 
 // Saved Favorites Button Listener
@@ -322,11 +323,10 @@ function clearElements() {
     $("#charHolder").empty();
     $("#gridContainer").empty();
     $("#articleDisplay").hide();
-
 };
 
 function clearFav() {
-    $("#sidebar").hide();
+    $("#sidebar-container").hide();
     $("#previousBtn").hide();
     $("#nextBtn").hide();
     $(".news-card").hide();
@@ -335,7 +335,7 @@ function clearFav() {
 function showFav() {
     $("#previousBtn").show();
     $("#nextBtn").show();
-    $("#sidebar").show();
+    $("#sidebar-container").show();
     $(".news-card").show();
 };
 
